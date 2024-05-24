@@ -1,3 +1,5 @@
+import com.juanalmeyda.webapp.Greeting
+import com.juanalmeyda.webapp.greetingLens
 import com.juanalmeyda.webapp.newBackend
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
@@ -17,8 +19,9 @@ class BackendTest {
         val response: Response = backend(Request(GET, "http://localhost:8080/hello?name=John"))
 
         expectThat(response.status).isEqualTo(OK)
-        expectThat(response.bodyString()).isEqualTo("Hello John!")
 
-        println(response)
+        val greeting = greetingLens.extract(response)
+        expectThat(greeting).isEqualTo(Greeting("John"))
+        expectThat(greeting.greet()).isEqualTo("Hello John!")
     }
 }
