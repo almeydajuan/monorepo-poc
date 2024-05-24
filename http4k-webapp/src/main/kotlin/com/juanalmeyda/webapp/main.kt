@@ -24,7 +24,7 @@ val greetingLens = Body.auto<Greeting>().toLens()
 fun newBackend(): HttpHandler = routes(
     "/hello" bind GET to { request: Request ->
         val name = nameParamLens(request)
-        greetingLens.inject(Greeting(name), Response(Status.OK))
+        Response(Status.OK).with(greetingLens of Greeting(name))
     }
 ).withFilter(CatchAll()).withFilter(PrintRequestAndResponse())
 
