@@ -15,7 +15,7 @@ import strikt.assertions.isEqualTo
 
 class BackendTest {
 
-    private val backend = newBackend()
+    private val backend = newBackend(Game())
 
     @Test
     fun `start new game`() {

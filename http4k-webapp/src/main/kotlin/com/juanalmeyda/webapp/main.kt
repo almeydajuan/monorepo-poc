@@ -21,7 +21,7 @@ import org.http4k.server.asServer
 import java.util.concurrent.atomic.AtomicReference
 
 fun main() {
-    val httpHandler: HttpHandler = newBackend()
+    val httpHandler: HttpHandler = newBackend(Game())
 
     httpHandler.asServer(Jetty(8080)).start()
 }
@@ -30,8 +30,8 @@ val gameLens = Body.auto<Game>().toLens()
 val xLens = Query.int().required("x")
 val yLens = Query.int().required("y")
 
-fun newBackend(): HttpHandler {
-    val game = AtomicReference(Game())
+fun newBackend(initialGame: Game): HttpHandler {
+    val game = AtomicReference(initialGame)
 
     return routes(
         "/game" bind GET to { _ ->
