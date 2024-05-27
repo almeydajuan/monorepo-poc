@@ -19,6 +19,9 @@ this [simple tutorial](https://www.youtube.com/watch?v=FVvn-aFO--Q&ab_channel=Dm
 - create a yml generator
 - create tests that spin up a db
 - create tests with approval files
+- separated Gradle tasks to run unit and integration tests
 - create tests using proxying
 - create run all the projects with a script using `just`
 - create a centralised version manager
+- test different docker images
+- create a live documentation
