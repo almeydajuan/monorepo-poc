@@ -1,5 +1,5 @@
-import com.juanalmeyda.webapp.Greeting
-import com.juanalmeyda.webapp.greetingLens
+import com.juanalmeyda.webapp.Game
+import com.juanalmeyda.webapp.gameLens
 import com.juanalmeyda.webapp.newBackend
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
@@ -13,15 +13,13 @@ class BackendTest {
 
     private val backend = newBackend()
 
-
     @Test
-    fun `check hello world`() {
-        val response: Response = backend(Request(GET, "http://localhost:8080/hello?name=John"))
+    fun `get new game`() {
+        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
 
         expectThat(response.status).isEqualTo(OK)
 
-        val greeting = greetingLens.extract(response)
-        expectThat(greeting).isEqualTo(Greeting("John"))
-        expectThat(greeting.greet()).isEqualTo("Hello John!")
+        val game = gameLens.extract(response)
+        expectThat(game).isEqualTo(Game())
     }
 }
