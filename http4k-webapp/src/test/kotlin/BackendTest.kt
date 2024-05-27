@@ -46,4 +46,15 @@ class BackendTest {
             )
         )
     }
+
+    @Test
+    fun `player X wins`() {
+        val backend = newBackend(finishedGame)
+        expectThat(gameLens(backend(Request(GET, "/game"))).winner).isEqualTo(X)
+    }
 }
+
+val finishedGame = Game()
+    .makeMove(0, 0).makeMove(1, 0)
+    .makeMove(0, 1).makeMove(1, 1)
+    .makeMove(0, 2)

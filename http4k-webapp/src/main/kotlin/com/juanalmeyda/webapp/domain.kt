@@ -2,6 +2,7 @@ package com.juanalmeyda.webapp
 
 import com.juanalmeyda.webapp.Player.O
 import com.juanalmeyda.webapp.Player.X
+import org.http4k.template.ViewModel
 
 data class Game(val moves: List<Move> = emptyList()) {
     val winner: Player? = findWinner()
@@ -28,3 +29,26 @@ data class Game(val moves: List<Move> = emptyList()) {
 data class Move(val x: Int, val y: Int, val player: Player)
 
 enum class Player { X, O }
+
+@Suppress("unused")
+class GameView(
+    val rows: List<List<CellView>>,
+    val winner: String?
+) : ViewModel
+
+@Suppress("unused")
+class CellView(
+    val x: Int,
+    val y: Int,
+    val player: String?
+)
+
+fun Game.toGameView() = GameView(
+    rows = (0..2).map { x ->
+        (0..2).map { y ->
+            val player = moves.find { it.x == x && it.y == y }?.player?.name
+            CellView(x, y, player)
+        }
+    },
+    winner = winner?.name
+)
