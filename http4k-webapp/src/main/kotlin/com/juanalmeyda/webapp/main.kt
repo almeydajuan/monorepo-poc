@@ -59,7 +59,7 @@ fun newBackend(initialGame: Game): HttpHandler {
 }
 
 fun newFrontend(backend: HttpHandler): RoutingHttpHandler {
-    val htmlRenderer = HandlebarsTemplates().HotReload("src/main/kotlin")
+    val htmlRenderer = HandlebarsTemplates().CachingClasspath()
     return routes(
         "/" bind GET to {
             val response = backend(Request(GET, "/game"))
