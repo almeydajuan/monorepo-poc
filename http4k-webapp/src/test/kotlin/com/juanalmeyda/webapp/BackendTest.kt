@@ -2,6 +2,7 @@ package com.juanalmeyda.webapp
 
 import com.juanalmeyda.webapp.Player.O
 import com.juanalmeyda.webapp.Player.X
+import org.http4k.core.Method.DELETE
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
 import org.http4k.core.Request
@@ -49,6 +50,19 @@ class BackendTest {
     fun `player X wins`() {
         val backend = newBackend(finishedGame)
         expectThat(gameLens(backend(Request(GET, "/game"))).winner).isEqualTo(X)
+    }
+
+    @Test
+    fun `restart game`() {
+        val backend = newBackend(finishedGame)
+        expectThat(backend(Request(DELETE, "/game")).status).isEqualTo(OK)
+
+        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
+
+        expectThat(response.status).isEqualTo(OK)
+
+        val game = gameLens.extract(response)
+        expectThat(game).isEqualTo(Game())
     }
 }
 
