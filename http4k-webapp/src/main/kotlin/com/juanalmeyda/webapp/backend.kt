@@ -3,6 +3,7 @@ package com.juanalmeyda.webapp
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method
+import org.http4k.core.Method.DELETE
 import org.http4k.core.Response
 import org.http4k.core.Status
 import org.http4k.core.with
@@ -33,7 +34,7 @@ fun newBackend(initialGame: Game): HttpHandler {
 
             Response(Status.OK).with(gameLens of game.get())
         },
-        "/game" bind Method.DELETE to { _ ->
+        "/game" bind DELETE to { _ ->
             game.set(Game())
             Response(Status.OK).with(gameLens of game.get())
         }

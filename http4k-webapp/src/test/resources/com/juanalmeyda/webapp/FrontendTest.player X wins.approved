@@ -17,5 +17,8 @@
             <a href="/move/2/2">_</a>&nbsp;
             
         </p>
-    X wins!! 🥳</body>
+    X wins!! 🥳<br/>
+    <br/>
+    <a href="/restart">Restart game</a>
+    </body>
 </html>
