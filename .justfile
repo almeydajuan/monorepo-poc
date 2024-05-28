@@ -10,6 +10,13 @@ approve project="":
   export TO=approved
   find "./{{project}}" -name "*.$FROM" -exec bash -c 'mv -v "$1" "${1%.$FROM}".$TO' - '{}' \;
 
+_requirements:
+  #!/usr/bin/env sh
+  set -o errexit
+  venv/bin/python3 -m pip install --quiet --upgrade pip
+  venv/bin/pip3 install \
+    --quiet \
+    -r tools/requirements.txt
 
 check-all:
     #!/usr/bin/env python3
@@ -46,4 +53,12 @@ check-all:
             except subprocess.CalledProcessError as e:
                 # If the command failed, print the error
                 print(f"Error executing {command}: {e.stderr.decode()}")
+
+hello:
+    #!/usr/bin/env sh python3
+
+    pwd
+    from tools.check import check
+
+
 
