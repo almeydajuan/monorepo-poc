@@ -1,9 +1,7 @@
-import com.juanalmeyda.webapp.Game
-import com.juanalmeyda.webapp.Move
+package com.juanalmeyda.webapp
+
 import com.juanalmeyda.webapp.Player.O
 import com.juanalmeyda.webapp.Player.X
-import com.juanalmeyda.webapp.gameLens
-import com.juanalmeyda.webapp.newBackend
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
 import org.http4k.core.Request

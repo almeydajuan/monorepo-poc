@@ -186,4 +186,4 @@ ij_markdown_force_one_space_after_list_bullet = true
 ij_markdown_force_one_space_after_blockquote_symbol = true
 
 # [*.{approved,puml}]
-# insert_final_newline = false
+insert_final_newline = false

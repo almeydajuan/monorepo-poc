@@ -1,6 +1,5 @@
-import com.juanalmeyda.webapp.Game
-import com.juanalmeyda.webapp.newBackend
-import com.juanalmeyda.webapp.newFrontend
+package com.juanalmeyda.webapp
+
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
 import org.http4k.core.Status.Companion.OK
