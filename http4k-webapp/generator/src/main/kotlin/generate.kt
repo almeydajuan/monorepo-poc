@@ -5,8 +5,7 @@ import com.juanalmeyda.metadata.yaml.yaml
 
 fun main() {
     FileExporter(
-        service = "http4k-webapp",
-        yaml = yaml {
+        yaml {
             version(1)
             service {
                 name("http4k-app")

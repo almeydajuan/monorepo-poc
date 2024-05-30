@@ -1,12 +1,12 @@
 package com.juanalmeyda.metadata
 
 import java.io.File
-import java.nio.file.Paths
 
-fun FileExporter(service: String, yaml: String) {
-    println(Paths.get("").toAbsolutePath().toString())
-
-    val file = File("$service/config.yml")
+fun FileExporter(
+    yaml: String,
+    basePath: String = ".."
+) {
+    val file = File("$basePath/config.yml")
     if (file.exists()) {
         file.delete()
     }

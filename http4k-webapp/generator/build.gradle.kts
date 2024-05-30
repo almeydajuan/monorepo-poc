@@ -16,3 +16,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.register("render", JavaExec::class) {
+    group = "application"
+    description = "Generates the project metadata"
+    mainClass.set("GenerateKt")
+    classpath = sourceSets.main.get().runtimeClasspath
+    doFirst {
+        println(sourceSets.main.get().runtimeClasspath)
+    }
+}
