@@ -31,12 +31,28 @@ class YamlBuilderTest {
         val yamlFile = yaml {
             version(1)
             service {
-                name("my-service")
+                name("service-with-characteristics")
             }
             characteristics {
                 characteristic(test)
                 characteristic(other)
                 characteristic(experimental)
+            }
+        }
+        approver.assertApproved(yamlFile.wrapInResponse())
+    }
+
+    @Test
+    fun `with attributes`(approver: Approver) {
+        val yamlFile = yaml {
+            version(1)
+            service {
+                name("service-with-attributes")
+            }
+            attributes {
+                attribute(attribute = test to "first")
+                attribute(attribute = other to "maybe")
+                attribute(attribute = experimental to "always")
             }
         }
         approver.assertApproved(yamlFile.wrapInResponse())

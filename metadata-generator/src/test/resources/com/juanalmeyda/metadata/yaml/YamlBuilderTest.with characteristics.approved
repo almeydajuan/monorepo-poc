@@ -1,6 +1,6 @@
 version: 1
 service:
-  name: my-service
+  name: service-with-characteristics
 characteristics:
   - test
   - other

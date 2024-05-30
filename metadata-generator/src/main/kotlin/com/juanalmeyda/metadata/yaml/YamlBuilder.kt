@@ -19,6 +19,23 @@ class YamlBuilder {
         content.append(characteristicsBuilder.build())
     }
 
+    fun attributes(init: AttributesBuilder.() -> Unit) {
+        val attributesBuilder = AttributesBuilder().apply(init)
+        content.append("attributes:\n")
+        content.append(attributesBuilder.build())
+    }
+
+    fun build(): String = content.toString()
+}
+
+class AttributesBuilder {
+    private val content = StringBuilder()
+
+    fun attribute(attribute: Pair<Characteristic, String>) {
+        content.append("  - key: ${attribute.first.name}\n")
+        content.append("    value: ${attribute.second}\n")
+    }
+
     fun build(): String = content.toString()
 }
 

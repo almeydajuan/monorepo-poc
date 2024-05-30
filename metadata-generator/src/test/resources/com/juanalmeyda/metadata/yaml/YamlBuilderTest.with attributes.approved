@@ -1,0 +1,10 @@
+version: 1
+service:
+  name: service-with-attributes
+attributes:
+  - key: test
+    value: first
+  - key: other
+    value: maybe
+  - key: experimental
+    value: always
