@@ -8,7 +8,7 @@ fun main() {
         yaml {
             version(1)
             service {
-                name("http4k-app")
+                name("tictactoe4k")
             }
             characteristics {
                 characteristic(experimental)
