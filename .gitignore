@@ -12,3 +12,6 @@ bin/
 *.swp
 *.yaml.dec
 venv/
+
+# temp
+**/config.yml
