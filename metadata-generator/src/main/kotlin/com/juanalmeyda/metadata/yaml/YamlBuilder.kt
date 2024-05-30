@@ -13,6 +13,24 @@ class YamlBuilder {
         content.append(serviceBuilder.build())
     }
 
+    fun characteristics(init: CharacteristicsBuilder.() -> Unit) {
+        val characteristicsBuilder = CharacteristicsBuilder().apply(init)
+        content.append("characteristics:\n")
+        content.append(characteristicsBuilder.build())
+    }
+
+    fun build(): String = content.toString()
+}
+
+class CharacteristicsBuilder {
+    private val content = StringBuilder()
+
+    fun characteristics(characteristics: List<Characteristics>) {
+        characteristics.forEach {
+            content.append("  - $it\n")
+        }
+    }
+
     fun build(): String = content.toString()
 }
 
@@ -24,6 +42,13 @@ class ServiceBuilder {
     }
 
     fun build(): String = content.toString()
+}
+
+@Suppress("EnumEntryName")
+enum class Characteristics {
+    test,
+    experimental,
+    other
 }
 
 fun yaml(init: YamlBuilder.() -> Unit): String {

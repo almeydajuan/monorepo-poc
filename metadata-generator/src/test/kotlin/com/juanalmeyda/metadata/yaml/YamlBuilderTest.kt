@@ -1,5 +1,8 @@
 package com.juanalmeyda.metadata.yaml
 
+import com.juanalmeyda.metadata.yaml.Characteristics.experimental
+import com.juanalmeyda.metadata.yaml.Characteristics.other
+import com.juanalmeyda.metadata.yaml.Characteristics.test
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
@@ -18,6 +21,20 @@ class YamlBuilderTest {
             version(1)
             service {
                 name("my-service")
+            }
+        }
+        approver.assertApproved(yamlFile.wrapInResponse())
+    }
+
+    @Test
+    fun `with characteristics`(approver: Approver) {
+        val yamlFile = yaml {
+            version(1)
+            service {
+                name("my-service")
+            }
+            characteristics {
+                characteristics(listOf(test, other, experimental))
             }
         }
         approver.assertApproved(yamlFile.wrapInResponse())
