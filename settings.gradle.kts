@@ -1,1 +1,1 @@
-include("http4k-webapp", "metadata-generator")
+include("http4k-webapp", "http4k-webapp:generator", "metadata-generator")
