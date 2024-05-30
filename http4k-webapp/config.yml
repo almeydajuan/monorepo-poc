@@ -1,0 +1,9 @@
+version: 1
+service:
+  name: http4k-app
+characteristics:
+  - experimental
+  - test
+attributes:
+  - key: experimental
+    value: webapp
