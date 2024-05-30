@@ -13,5 +13,3 @@ bin/
 *.yaml.dec
 venv/
 
-# temp
-**/config.yml

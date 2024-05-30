@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
+    implementation(platform("org.http4k:http4k-bom:5.21.0.0"))
+
     testImplementation(kotlin("test"))
+    testImplementation("org.http4k:http4k-format-jackson-yaml")
+    testImplementation("org.http4k:http4k-testing-approval")
 }
 
 tasks.test {
