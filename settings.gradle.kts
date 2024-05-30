@@ -1,3 +1,3 @@
-include("http4k-webapp", "http4k-webapp:generator", "metadata-generator")
+include("tictactoe4k", "tictactoe4k:generator", "metadata-generator")
 
 rootProject.name  = "monorepo-poc"
