@@ -1,8 +1,8 @@
 package com.juanalmeyda.metadata.yaml
 
-import com.juanalmeyda.metadata.yaml.Characteristics.experimental
-import com.juanalmeyda.metadata.yaml.Characteristics.other
-import com.juanalmeyda.metadata.yaml.Characteristics.test
+import com.juanalmeyda.metadata.yaml.Characteristic.experimental
+import com.juanalmeyda.metadata.yaml.Characteristic.other
+import com.juanalmeyda.metadata.yaml.Characteristic.test
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
@@ -34,7 +34,9 @@ class YamlBuilderTest {
                 name("my-service")
             }
             characteristics {
-                characteristics(listOf(test, other, experimental))
+                characteristic(test)
+                characteristic(other)
+                characteristic(experimental)
             }
         }
         approver.assertApproved(yamlFile.wrapInResponse())
