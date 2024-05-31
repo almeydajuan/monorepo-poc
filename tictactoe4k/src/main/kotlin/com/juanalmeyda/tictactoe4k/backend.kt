@@ -1,4 +1,4 @@
-package com.juanalmeyda.webapp
+package com.juanalmeyda.tictactoe4k
 
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler

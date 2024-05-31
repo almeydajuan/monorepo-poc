@@ -1,7 +1,11 @@
 package com.juanalmeyda.webapp
 
-import com.juanalmeyda.webapp.Player.O
-import com.juanalmeyda.webapp.Player.X
+import com.juanalmeyda.tictactoe4k.Game
+import com.juanalmeyda.tictactoe4k.Move
+import com.juanalmeyda.tictactoe4k.gameLens
+import com.juanalmeyda.tictactoe4k.newBackend
+import com.juanalmeyda.tictactoe4k.Player.O
+import com.juanalmeyda.tictactoe4k.Player.X
 import org.http4k.core.Method.DELETE
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST

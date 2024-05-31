@@ -1,7 +1,7 @@
-package com.juanalmeyda.webapp
+package com.juanalmeyda.tictactoe4k
 
-import com.juanalmeyda.webapp.Player.O
-import com.juanalmeyda.webapp.Player.X
+import com.juanalmeyda.tictactoe4k.Player.O
+import com.juanalmeyda.tictactoe4k.Player.X
 import org.http4k.template.ViewModel
 
 data class Game(val moves: List<Move> = emptyList()) {

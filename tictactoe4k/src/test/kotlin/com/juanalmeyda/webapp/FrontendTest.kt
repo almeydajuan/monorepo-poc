@@ -1,5 +1,8 @@
 package com.juanalmeyda.webapp
 
+import com.juanalmeyda.tictactoe4k.Game
+import com.juanalmeyda.tictactoe4k.newBackend
+import com.juanalmeyda.tictactoe4k.newFrontend
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
 import org.http4k.core.Status.Companion.OK
