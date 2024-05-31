@@ -17,6 +17,8 @@ dependencies {
     implementation("org.http4k:http4k-format-jackson")
     implementation("org.http4k:http4k-template-handlebars")
 
+    implementation(project(":metadata-generator"))
+
     testImplementation(kotlin("test"))
 
     testApi("io.strikt:strikt-core:0.34.1")
@@ -25,4 +27,19 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+val renderTask = tasks.register("render", JavaExec::class) {
+    group = "application"
+    description = "Generates the project metadata"
+    mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
+    classpath = sourceSets.main.get().runtimeClasspath
+    doFirst {
+        println(sourceSets.main.get().runtimeClasspath)
+    }
+
+}
+
+tasks.check {
+    dependsOn(renderTask)
 }

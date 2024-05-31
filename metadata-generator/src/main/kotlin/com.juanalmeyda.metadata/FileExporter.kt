@@ -3,10 +3,9 @@ package com.juanalmeyda.metadata
 import java.io.File
 
 fun FileExporter(
-    yaml: String,
-    basePath: String = ".."
+    yaml: String
 ) {
-    val file = File("$basePath/config.yml")
+    val file = File("config.yml")
     if (file.exists()) {
         file.delete()
     }
