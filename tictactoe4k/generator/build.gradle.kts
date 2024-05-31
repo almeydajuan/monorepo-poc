@@ -17,7 +17,7 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register("render", JavaExec::class) {
+val renderTask = tasks.register("render", JavaExec::class) {
     group = "application"
     description = "Generates the project metadata"
     mainClass.set("GenerateKt")
@@ -25,4 +25,9 @@ tasks.register("render", JavaExec::class) {
     doFirst {
         println(sourceSets.main.get().runtimeClasspath)
     }
+
 }
+
+val checkTask: Task? = tasks.findByName("check")
+
+checkTask?.dependsOn(renderTask)
