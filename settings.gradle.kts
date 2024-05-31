@@ -1,3 +1,3 @@
-include("tictactoe4k", "tictactoe4k:generator", "metadata-generator")
+include("tictactoe4k", "metadata-generator")
 
-rootProject.name  = "monorepo-poc"
+rootProject.name = "monorepo-poc"

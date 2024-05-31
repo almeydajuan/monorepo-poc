@@ -29,6 +29,9 @@ tasks.test {
     useJUnitPlatform()
 }
 
+// TODO: extract to a plugin together with
+//  implementation(project(":metadata-generator"))
+
 val renderTask = tasks.register("render", JavaExec::class) {
     group = "application"
     description = "Generates the project metadata"
