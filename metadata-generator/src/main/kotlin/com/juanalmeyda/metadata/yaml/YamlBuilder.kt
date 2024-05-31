@@ -26,6 +26,30 @@ class YamlBuilder {
     }
 
     fun build(): String = content.toString()
+
+    companion object {
+        fun fromConfig(yamlConfig: YamlConfig) = yaml {
+            version(yamlConfig.version)
+            service {
+                name(yamlConfig.serviceName)
+            }
+            if (yamlConfig.characteristics.isNotEmpty()) {
+                characteristics {
+                    yamlConfig.characteristics.forEach {
+                        characteristic(it)
+                    }
+                }
+            }
+            if (yamlConfig.attributes.isNotEmpty()) {
+                attributes {
+                    yamlConfig.attributes.forEach {
+                        attribute(it.toPair())
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 class AttributesBuilder {

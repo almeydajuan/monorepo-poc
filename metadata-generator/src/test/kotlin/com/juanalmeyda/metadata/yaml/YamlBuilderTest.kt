@@ -58,6 +58,18 @@ class YamlBuilderTest {
         approver.assertApproved(yamlFile.wrapInResponse())
     }
 
+    @Test
+    fun `initialise yaml through config`(approver: Approver) {
+        val yamlConfig = YamlConfig(
+            version = 1,
+            serviceName = "my-service",
+            characteristics = listOf(test, other, experimental),
+            attributes = mapOf(test to "first", other to "something")
+        )
+
+        approver.assertApproved(YamlBuilder.fromConfig(yamlConfig).wrapInResponse())
+    }
+
 }
 
 private fun String.wrapInResponse() = Response(OK).body(this).contentType(APPLICATION_YAML)
