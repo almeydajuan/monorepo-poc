@@ -46,11 +46,20 @@ tasks {
     val refreshGeneratedMetadata = register<Copy>("refreshGeneratedMetadata") {
         group = "documentation"
         description = "Generates the project metadata from test output"
-        from("src/test/resources/com/juanalmeyda/webapp/metadata") {
+        from(fileTree("src/test/resources").toList().map { it.path }) {
             include("*generate metadata*.approved")
             rename { "metadata.yaml" }
         }
         into("$projectDir/.generated")
+        doFirst {
+            if (inputs.sourceFiles.isEmpty) {
+                println(inputs.sourceFiles)
+                inputs.sourceFiles.forEach {
+                    println(it.name)
+                }
+                throw GradleException("No source generate metadata file found")
+            }
+        }
     }
 
     test {
