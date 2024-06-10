@@ -37,10 +37,6 @@ val renderTask = tasks.register("render", JavaExec::class) {
     description = "Generates the project metadata"
     mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
     classpath = sourceSets.main.get().runtimeClasspath
-    doFirst {
-        println(sourceSets.main.get().runtimeClasspath)
-    }
-
 }
 
 tasks.check {
