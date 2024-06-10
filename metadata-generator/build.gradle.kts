@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.0"
+    `java-test-fixtures`
 }
 
 group = "com.juanalmeyda"
@@ -15,6 +16,10 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.http4k:http4k-format-jackson-yaml")
     testImplementation("org.http4k:http4k-testing-approval")
+
+    testFixturesApi("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testFixturesImplementation("org.http4k:http4k-testing-approval")
+    testFixturesImplementation("org.http4k:http4k-format-jackson-yaml")
 }
 
 tasks.test {

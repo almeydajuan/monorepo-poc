@@ -1,5 +1,6 @@
 package com.juanalmeyda.webapp.metadata
 
+import com.juanalmeyda.metadata.YamlMetadataConfigTest
 import com.juanalmeyda.metadata.yaml.Characteristic.experimental
 import com.juanalmeyda.metadata.yaml.Characteristic.test
 import com.juanalmeyda.metadata.yaml.YamlConfig
