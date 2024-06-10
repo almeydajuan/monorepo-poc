@@ -29,15 +29,11 @@ dependencies {
 }
 
 tasks {
-    test {
-        useJUnitPlatform()
-    }
-
 // TODO: extract to a plugin together with
 //  implementation(project(":metadata-generator"))
 
     val renderTask = register("render", JavaExec::class) {
-        group = "application"
+        group = "documentation"
         description = "Generates the project metadata"
         mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
         classpath = sourceSets.main.get().runtimeClasspath
@@ -45,6 +41,21 @@ tasks {
 
     check {
         dependsOn(renderTask)
+    }
+
+    val refreshGeneratedMetadata = register<Copy>("refreshGeneratedMetadata") {
+        group = "documentation"
+        description = "Generates the project metadata from test output"
+        from("src/test/resources/com/juanalmeyda/webapp/metadata") {
+            include("*generate metadata*.approved")
+            rename { "metadata.yaml" }
+        }
+        into("$projectDir/.generated")
+    }
+
+    test {
+        useJUnitPlatform()
+        finalizedBy(refreshGeneratedMetadata)
     }
 
 }
