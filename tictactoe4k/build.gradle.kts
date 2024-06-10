@@ -23,6 +23,7 @@ dependencies {
 
     testApi("io.strikt:strikt-core:0.34.1")
     testImplementation("org.http4k:http4k-testing-approval")
+    testImplementation("org.http4k:http4k-format-jackson-yaml")
 }
 
 tasks.test {

@@ -1,0 +1,10 @@
+version: 1
+service:
+  name: Tic Tac Service
+characteristics:
+  - experimental
+attributes:
+  - key: experimental
+    value: example service
+  - key: test
+    value: generate yaml
