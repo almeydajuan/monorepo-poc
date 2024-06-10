@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.0"
+    `java-test-fixtures`
 }
 
 group = "com.juanalmeyda"
@@ -24,22 +25,30 @@ dependencies {
     testApi("io.strikt:strikt-core:0.34.1")
     testImplementation("org.http4k:http4k-testing-approval")
     testImplementation("org.http4k:http4k-format-jackson-yaml")
+
+
+    testFixturesApi("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testFixturesImplementation("org.http4k:http4k-testing-approval")
+    testFixturesImplementation("org.http4k:http4k-format-jackson-yaml")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 
 // TODO: extract to a plugin together with
 //  implementation(project(":metadata-generator"))
 
-val renderTask = tasks.register("render", JavaExec::class) {
-    group = "application"
-    description = "Generates the project metadata"
-    mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
-    classpath = sourceSets.main.get().runtimeClasspath
-}
+    val renderTask = register("render", JavaExec::class) {
+        group = "application"
+        description = "Generates the project metadata"
+        mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
+        classpath = sourceSets.main.get().runtimeClasspath
+    }
 
-tasks.check {
-    dependsOn(renderTask)
+    check {
+        dependsOn(renderTask)
+    }
+
 }
