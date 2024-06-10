@@ -46,20 +46,18 @@ tasks {
     val refreshGeneratedMetadata = register<Copy>("refreshGeneratedMetadata") {
         group = "documentation"
         description = "Generates the project metadata from test output"
-        from(fileTree("src/test/resources").toList().map { it.path }) {
-            include("*generate metadata*.approved")
+        val sourcedDir = "src/test/resources"
+        val fileNamePattern = "generate metadata"
+
+        val filesToCopy = fileTree(sourcedDir).toList().map { it.path }.filter { it.contains(fileNamePattern) }
+
+        if (filesToCopy.isEmpty()) throw GradleException("No required files under the name $fileNamePattern found")
+
+        from(filesToCopy) {
+            include("*$fileNamePattern*.approved")
             rename { "metadata.yaml" }
         }
         into("$projectDir/.generated")
-        doFirst {
-            if (inputs.sourceFiles.isEmpty) {
-                println(inputs.sourceFiles)
-                inputs.sourceFiles.forEach {
-                    println(it.name)
-                }
-                throw GradleException("No source generate metadata file found")
-            }
-        }
     }
 
     test {
