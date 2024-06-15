@@ -3,9 +3,6 @@ plugins {
     `java-test-fixtures`
 }
 
-group = "com.juanalmeyda"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
 }
