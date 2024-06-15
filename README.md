@@ -30,10 +30,15 @@ this [simple tutorial](https://www.youtube.com/watch?v=FVvn-aFO--Q&ab_channel=Dm
 
 ## Ideas
 
+Gradle:
 - centralize gradle configuration
+- Test plugin https://plugins.gradle.org/plugin/com.autonomousapps.dependency-analysis
+- Add a version catalog
 - create a centralised version manager
-- create tests that spin up a db
 - separated Gradle tasks to run unit and integration tests
+
+Others:
+- create tests that spin up a db
 - create run all the projects with a script using `just`
 - create an autopipeline
 - trigger some pipelines per push
