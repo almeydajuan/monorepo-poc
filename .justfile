@@ -1,9 +1,7 @@
 # [tests] run tests for the corresponding directory
 check project="":
     #!/usr/bin/env sh
-    project_name=`echo {{project}}`
-
-    if [ -z "${project_name}" ]; then
+    if [ -z `echo {{project}}` ]; then
       ./gradlew check
     else
       ./gradlew :{{project}}:check
