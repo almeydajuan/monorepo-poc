@@ -15,7 +15,3 @@ dependencies {
     testFixturesImplementation("org.http4k:http4k-testing-approval")
     testFixturesImplementation("org.http4k:http4k-format-jackson-yaml")
 }
-
-tasks.test {
-    useJUnitPlatform()
-}
