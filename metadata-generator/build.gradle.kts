@@ -3,10 +3,6 @@ plugins {
     `java-test-fixtures`
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     testImplementation("org.http4k:http4k-format-jackson-yaml")
     testImplementation("org.http4k:http4k-testing-approval")

@@ -2,10 +2,6 @@ plugins {
     id("backend")
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-jetty")
