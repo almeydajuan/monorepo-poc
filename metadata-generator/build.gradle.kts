@@ -4,10 +4,10 @@ plugins {
 }
 
 dependencies {
-    testImplementation("org.http4k:http4k-format-jackson-yaml")
-    testImplementation("org.http4k:http4k-testing-approval")
+    testImplementation(Http4k.format.jacksonYaml)
+    testImplementation(Http4k.testing.approval)
 
-    testFixturesApi("org.junit.jupiter:junit-jupiter-api:5.10.2")
-    testFixturesImplementation("org.http4k:http4k-testing-approval")
-    testFixturesImplementation("org.http4k:http4k-format-jackson-yaml")
+    testFixturesApi(Testing.junit.jupiter.api)
+    testFixturesImplementation(Http4k.testing.approval)
+    testFixturesImplementation(Http4k.format.jacksonYaml)
 }

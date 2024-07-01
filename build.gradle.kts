@@ -1,5 +1,5 @@
 plugins {
-    id("org.barfuin.gradle.taskinfo") version "2.2.0"
+    id("org.barfuin.gradle.taskinfo")
 }
 
 group = "com.juanalmeyda"

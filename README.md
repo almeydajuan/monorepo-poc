@@ -46,7 +46,6 @@ this [simple tutorial](https://www.youtube.com/watch?v=FVvn-aFO--Q&ab_channel=Dm
 ## Ideas
 
 Gradle:
-- centralize gradle configuration
 - Test plugin https://plugins.gradle.org/plugin/com.autonomousapps.dependency-analysis
 - Add a version catalog
 - create a centralised version manager

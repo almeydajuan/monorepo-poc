@@ -3,13 +3,13 @@ plugins {
 }
 
 dependencies {
-    implementation("org.http4k:http4k-core")
-    implementation("org.http4k:http4k-server-jetty")
-    implementation("org.http4k:http4k-client-okhttp")
-    implementation("org.http4k:http4k-format-jackson")
-    implementation("org.http4k:http4k-template-handlebars")
+    implementation(Http4k.core)
+    implementation(Http4k.server.jetty)
+    implementation(Http4k.client.okhttp)
+    implementation(Http4k.format.jackson)
+    implementation(Http4k.template.handlebars)
 
-    testApi("io.strikt:strikt-core:0.34.1")
-    testImplementation("org.http4k:http4k-testing-approval")
-    testImplementation("org.http4k:http4k-format-jackson-yaml")
+    testApi(Testing.strikt.core)
+    testImplementation(Http4k.testing.approval)
+    testImplementation(Http4k.format.jacksonYaml)
 }
