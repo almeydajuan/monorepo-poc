@@ -28,6 +28,21 @@ this [simple tutorial](https://www.youtube.com/watch?v=FVvn-aFO--Q&ab_channel=Dm
    that we just created (`venv/bin/python3`)
    2. To get the interpreter properly configured, you may need to [add the facet manually](https://www.jetbrains.com/help/idea/adding-support-for-frameworks-and-technologies.html#manually-add-facet-to-module)
 
+### Gradle maintainance
+
+1. Edit the following properties in the top-level `build.gradle.kts`:
+
+  - set `gradleVersion` to the target [release version](https://gradle.org/releases/){target=\_blank}
+  - set `distributionSha256Sum` to the `Complete (-all) ZIP`
+    [checksum](https://gradle.org/release-checksums/) of the corresponding version
+
+2. Run `./gradlew wrapper` **and** commit changes to the following files:
+
+  - the top-level `build.gradle.kts` file edited above
+  - `gradle/wrapper/gradle-wrapper.properties`
+  - `gradle/wrapper/gradle-wrapper.jar`, if modified
+  - the top-level `gradlew` file, if modified
+
 ## Ideas
 
 Gradle:
