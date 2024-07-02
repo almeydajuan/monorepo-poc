@@ -1,5 +1,5 @@
 plugins {
-    id("metadata")
+    id("backend")
 }
 
 dependencies {
