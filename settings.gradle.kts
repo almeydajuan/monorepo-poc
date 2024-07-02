@@ -1,4 +1,5 @@
 import de.fayard.refreshVersions.core.FeatureFlag.GRADLE_UPDATES
+import de.fayard.refreshVersions.core.FeatureFlag.VERSIONS_CATALOG
 
 include("tictactoe4k", "metadata-generator")
 
@@ -12,6 +13,7 @@ plugins {
 refreshVersions {
     featureFlags {
         disable(GRADLE_UPDATES)
+        disable(VERSIONS_CATALOG)
     }
     rejectVersionIf {
         @Suppress("UnstableApiUsage")
