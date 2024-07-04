@@ -3,11 +3,9 @@ package com.juanalmeyda.metadata
 import com.juanalmeyda.metadata.yaml.YamlBuilder
 import com.juanalmeyda.metadata.yaml.YamlConfig
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
-import org.http4k.core.Response
-import org.http4k.core.Status.Companion.OK
-import org.http4k.lens.contentType
 import org.http4k.testing.Approver
 import org.http4k.testing.YamlApprovalTest
+import org.http4k.testing.assertApproved
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -18,11 +16,6 @@ interface YamlMetadataConfigTest {
 
     @Test
     fun `generate metadata`(approver: Approver) {
-        approver.assertYamlApproved(YamlBuilder.fromConfig(config))
+        approver.assertApproved(YamlBuilder.fromConfig(config), APPLICATION_YAML)
     }
 }
-
-fun Approver.assertYamlApproved(input: String) = Response(OK)
-    .body(input)
-    .contentType(APPLICATION_YAML)
-    .let(::assertApproved)
