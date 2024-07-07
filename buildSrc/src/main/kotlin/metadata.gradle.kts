@@ -8,7 +8,7 @@ dependencies {
 }
 
 tasks {
-    val renderTask = register("render", JavaExec::class) {
+    val renderTask = register("renderMetaData", JavaExec::class) {
         group = "documentation"
         description = "Generates the project metadata"
         mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
