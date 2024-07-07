@@ -1,5 +1,6 @@
 plugins {
     id("metadata")
+    id("approve")
 }
 
 dependencies {
