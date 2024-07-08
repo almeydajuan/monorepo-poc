@@ -10,8 +10,11 @@ tasks {
         fileTree(projectDir)
             .map { it.path }
             .filter { it.endsWith(".actual") }
-            .forEach {
+            .takeIf { it.isNotEmpty() }
+            ?.forEach {
                 file(it).renameTo(file(it.replace(".actual", ".approved")))
+                logger.lifecycle("Approve: Approved $it")
             }
+            ?: logger.lifecycle("Approve: Nothing to approve")
     }
 }
