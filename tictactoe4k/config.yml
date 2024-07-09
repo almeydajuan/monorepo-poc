@@ -1,9 +1,0 @@
-version: 1
-service:
-  name: tictactoe4k
-characteristics:
-  - experimental
-  - test
-attributes:
-  - key: experimental
-    value: webapp
