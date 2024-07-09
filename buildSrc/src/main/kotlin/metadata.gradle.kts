@@ -8,17 +8,6 @@ dependencies {
 }
 
 tasks {
-    val renderTask = register("renderMetadata", JavaExec::class) {
-        group = "documentation"
-        description = "Generates the project metadata"
-        mainClass.set("com.juanalmeyda.tictactoe4k.metadata.GenerateKt")
-        classpath = sourceSets.main.get().runtimeClasspath
-    }
-
-    check {
-        dependsOn(renderTask)
-    }
-
     val refreshGeneratedMetadata = register<Copy>("refreshGeneratedMetadata") {
         group = "documentation"
         description = "Generates the project metadata from test output"
