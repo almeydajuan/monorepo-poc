@@ -54,8 +54,10 @@ Gradle:
 
 Others:
 
+- generate openapi metadata
 - create tests that spin up a db
 - create run all the projects with a script using `just`
+- create a docker image with all projects together
 - create an autopipeline
 - trigger some pipelines per push
 - create tests using proxying
