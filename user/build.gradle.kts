@@ -7,6 +7,7 @@ dependencies {
     api("dev.forkhandles:values4k:_")
 
     implementation(Http4k.core)
+    implementation(Http4k.format.jackson)
 
     testApi(Testing.strikt.core)
 }
