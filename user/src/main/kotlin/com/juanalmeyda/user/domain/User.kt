@@ -1,4 +1,4 @@
-package com.juanalmeyda.user
+package com.juanalmeyda.user.domain
 
 import dev.forkhandles.values.IntValue
 import dev.forkhandles.values.IntValueFactory
