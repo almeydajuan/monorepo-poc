@@ -58,18 +58,12 @@ fun newBackend(): HttpHandler {
         "/user" bind GET to { request ->
             val userId = userIdLens(request)
 
-            val userFound = users[userId]
-
-            if (userFound == null) {
-                Response(NOT_FOUND)
-            } else {
-                Response(OK).with(userLens of userFound)
-            }
-
+            users[userId]?.let {
+                Response(OK).with(userLens of it)
+            } ?: Response(NOT_FOUND)
         },
         "/user" bind POST to { request ->
-            val user = userLens(request)
-            users[user.id] = user
+            users[userLens(request).id] = userLens(request)
 
             Response(CREATED)
         }
