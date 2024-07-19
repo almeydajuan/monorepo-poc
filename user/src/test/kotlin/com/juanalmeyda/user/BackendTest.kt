@@ -56,7 +56,8 @@ class BackendTest {
         val creationResponse: Response = backend(Request(POST, "http://localhost:8080/user").with(userLens of juan))
         expectThat(creationResponse.status).isEqualTo(CREATED)
 
-        val deletionResponse: Response = backend(Request(DELETE, "http://localhost:8080/user").with(userIdLens of juan.id))
+        val deletionResponse: Response =
+            backend(Request(DELETE, "http://localhost:8080/user").with(userIdLens of juan.id))
         expectThat(deletionResponse.status).isEqualTo(OK)
 
         val findUserResponse = backend(Request(GET, "http://localhost:8080/user").with(userIdLens of juan.id))
@@ -65,25 +66,46 @@ class BackendTest {
 }
 
 fun newBackend(): HttpHandler {
-    val users: MutableMap<UserId, User> = mutableMapOf()
+    val userRepository: UserRepository = InMemoryUserRepository()
 
     return routes(
         "/user" bind GET to { request ->
             val userId = userIdLens(request)
 
-            users[userId]?.let {
+            userRepository.findById(userId)?.let {
                 Response(OK).with(userLens of it)
             } ?: Response(NOT_FOUND)
         },
         "/user" bind POST to { request ->
-            users[userLens(request).id] = userLens(request)
+            userRepository.save(userLens(request))
 
             Response(CREATED)
         },
         "/user" bind DELETE to { request ->
-            users.remove(userIdLens(request))
+            userRepository.delete(userIdLens(request))
 
             Response(OK)
         }
     )
+}
+
+interface UserRepository {
+    fun findById(id: UserId): User?
+    fun save(user: User)
+    fun delete(id: UserId)
+}
+
+class InMemoryUserRepository : UserRepository {
+    private val users: MutableMap<UserId, User> = mutableMapOf()
+
+    override fun findById(id: UserId): User? = users[id]
+
+    override fun save(user: User) {
+        users[user.id] = user
+    }
+
+    override fun delete(id: UserId) {
+        users.remove(id)
+    }
+
 }
