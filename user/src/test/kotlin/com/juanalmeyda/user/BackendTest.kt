@@ -3,6 +3,7 @@ package com.juanalmeyda.user
 import com.juanalmeyda.user.UnifiedRandoms.Companion.Random
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
+import org.http4k.core.Method.DELETE
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
 import org.http4k.core.Request
@@ -49,6 +50,18 @@ class BackendTest {
         expectThat(findUserResponse.status).isEqualTo(OK)
         expectThat(userLens(findUserResponse)).isEqualTo(juan)
     }
+
+    @Test
+    fun `delete user`() {
+        val creationResponse: Response = backend(Request(POST, "http://localhost:8080/user").with(userLens of juan))
+        expectThat(creationResponse.status).isEqualTo(CREATED)
+
+        val deletionResponse: Response = backend(Request(DELETE, "http://localhost:8080/user").with(userIdLens of juan.id))
+        expectThat(deletionResponse.status).isEqualTo(OK)
+
+        val findUserResponse = backend(Request(GET, "http://localhost:8080/user").with(userIdLens of juan.id))
+        expectThat(findUserResponse.status).isEqualTo(NOT_FOUND)
+    }
 }
 
 fun newBackend(): HttpHandler {
@@ -66,6 +79,11 @@ fun newBackend(): HttpHandler {
             users[userLens(request).id] = userLens(request)
 
             Response(CREATED)
+        },
+        "/user" bind DELETE to { request ->
+            users.remove(userIdLens(request))
+
+            Response(OK)
         }
     )
 }
