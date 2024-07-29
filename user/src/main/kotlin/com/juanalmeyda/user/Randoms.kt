@@ -9,7 +9,7 @@ import java.util.UUID
  * Provide controlled randomness to the various applications.
  */
 // TODO: extract to infra folder
-interface UnifiedRandoms {
+interface RandomsGenerator {
     operator fun <T : Value<UUID>> invoke(factory: UUIDValueFactory<T>): T
     operator fun <T : Value<String>> invoke(factory: NonBlankStringValueFactory<T>): T
 
@@ -22,7 +22,7 @@ interface UnifiedRandoms {
 
     companion object {
         val Random
-            get() = object : UnifiedRandoms {
+            get() = object : RandomsGenerator {
                 override operator fun <T : Value<UUID>> invoke(factory: UUIDValueFactory<T>) =
                     factory.of(UUID.randomUUID())
 
