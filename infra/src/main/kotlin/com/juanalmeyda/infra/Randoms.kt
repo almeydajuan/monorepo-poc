@@ -1,4 +1,4 @@
-package com.juanalmeyda.user
+package com.juanalmeyda.infra
 
 import dev.forkhandles.values.NonBlankStringValueFactory
 import dev.forkhandles.values.UUIDValueFactory

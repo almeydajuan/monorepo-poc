@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    api(platform("dev.forkhandles:forkhandles-bom:_"))
-    api("dev.forkhandles:values4k:_")
+    // TODO: move to a proper convention plugin
+    api(project(":infra"))
 
     implementation(Http4k.core)
     implementation(Http4k.format.jackson)

@@ -1,6 +1,6 @@
 package com.juanalmeyda.user.domain
 
-import com.juanalmeyda.user.RandomsGenerator.Companion.Random
+import com.juanalmeyda.infra.RandomsGenerator.Companion.Random
 import dev.forkhandles.values.IntValue
 import dev.forkhandles.values.IntValueFactory
 import dev.forkhandles.values.StringValue

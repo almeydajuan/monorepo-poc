@@ -1,7 +1,7 @@
 import de.fayard.refreshVersions.core.FeatureFlag.GRADLE_UPDATES
 import de.fayard.refreshVersions.core.FeatureFlag.VERSIONS_CATALOG
 
-include("tictactoe4k", "metadata-generator", "user")
+include("infra", "tictactoe4k", "metadata-generator", "user")
 
 rootProject.name = "monorepo-poc"
 
