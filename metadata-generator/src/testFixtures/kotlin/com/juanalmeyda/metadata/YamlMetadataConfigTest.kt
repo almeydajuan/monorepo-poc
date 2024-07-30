@@ -1,7 +1,7 @@
 package com.juanalmeyda.metadata
 
-import com.juanalmeyda.metadata.yaml.YamlBuilder
 import com.juanalmeyda.metadata.yaml.YamlConfig
+import com.juanalmeyda.metadata.yaml.YamlParser
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
 import org.http4k.testing.Approver
 import org.http4k.testing.YamlApprovalTest
@@ -16,6 +16,6 @@ interface YamlMetadataConfigTest {
 
     @Test
     fun `generate metadata`(approver: Approver) {
-        approver.assertApproved(YamlBuilder.fromConfig(config), APPLICATION_YAML)
+        approver.assertApproved(YamlParser.asFormatString(config), APPLICATION_YAML)
     }
 }

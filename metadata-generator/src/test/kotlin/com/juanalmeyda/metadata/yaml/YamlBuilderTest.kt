@@ -15,7 +15,7 @@ class YamlBuilderTest {
 
     @Test
     fun `initialise yaml through config`(approver: Approver) {
-        val yamlConfig = YamlConfig2(
+        val yamlConfig = YamlConfig(
             version = 1,
             service = Service("my-service"),
             characteristics = listOf(test, other, experimental),
