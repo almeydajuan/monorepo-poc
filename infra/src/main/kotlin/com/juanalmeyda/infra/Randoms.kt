@@ -13,7 +13,6 @@ interface RandomsGenerator {
     operator fun <T : Value<UUID>> invoke(factory: UUIDValueFactory<T>): T
     operator fun <T : Value<String>> invoke(factory: NonBlankStringValueFactory<T>): T
 
-    // TODO: test these functions
     fun <T : Value<UUID>, R> repeat(factory: UUIDValueFactory<T>, size: Int, transform: (T) -> R) =
         run { List(size) { transform(invoke(factory)) } }
 
