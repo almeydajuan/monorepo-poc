@@ -1,7 +1,0 @@
-version: 1
-service:
-  name: service-with-characteristics
-characteristics:
-  - test
-  - other
-  - experimental
