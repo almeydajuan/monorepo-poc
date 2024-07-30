@@ -5,3 +5,8 @@ characteristics:
   - test
   - other
   - experimental
+attributes:
+  - key: test
+    value: first
+  - key: other
+    value: something

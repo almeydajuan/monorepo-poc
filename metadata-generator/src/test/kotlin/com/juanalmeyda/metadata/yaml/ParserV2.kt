@@ -21,7 +21,8 @@ class ParserV2 {
         val yamlObject = YamlObject(
             version = 1,
             service = SomeService("my-service"),
-            characteristics = listOf("test", "other", "experimental")
+            characteristics = listOf("test", "other", "experimental"),
+            attributes = listOf(SomeAttribute("test", "first"), SomeAttribute("other", "something"))
         )
         approver.assertApproved(YamlParser.asFormatString(yamlObject), contentType = APPLICATION_YAML)
     }
@@ -30,7 +31,13 @@ class ParserV2 {
 data class YamlObject(
     val version: Int,
     val service: SomeService,
-    val characteristics: List<String>
+    val characteristics: List<String>,
+    val attributes: List<SomeAttribute>
+)
+
+data class SomeAttribute(
+    val key: String,
+    val value: String
 )
 
 data class SomeService(
