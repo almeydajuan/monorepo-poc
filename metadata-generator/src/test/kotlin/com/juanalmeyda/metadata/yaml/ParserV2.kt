@@ -1,15 +1,9 @@
 package com.juanalmeyda.metadata.yaml
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
-import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.juanalmeyda.metadata.yaml.Characteristic.experimental
 import com.juanalmeyda.metadata.yaml.Characteristic.other
 import com.juanalmeyda.metadata.yaml.Characteristic.test
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
-import org.http4k.format.ConfigurableJacksonYaml
-import org.http4k.format.asConfigurable
 import org.http4k.testing.Approver
 import org.http4k.testing.YamlApprovalTest
 import org.http4k.testing.assertApproved
@@ -21,41 +15,12 @@ class ParserV2 {
 
     @Test
     fun `minimum yaml`(approver: Approver) {
-        val yamlObject = YamlObject(
+        val yamlObject = YamlConfig2(
             version = 1,
-            service = SomeService("my-service"),
+            service = Service("my-service"),
             characteristics = listOf(test, other, experimental),
-            attributes = listOf(SomeAttribute(test, "first"), SomeAttribute(other, "something"))
+            attributes = listOf(Attribute(test, "first"), Attribute(other, "something"))
         )
         approver.assertApproved(YamlParser.asFormatString(yamlObject), contentType = APPLICATION_YAML)
     }
 }
-
-data class YamlObject(
-    val version: Int,
-    val service: SomeService,
-    val characteristics: List<Characteristic>,
-    val attributes: List<SomeAttribute>
-)
-
-data class SomeAttribute(
-    val key: Characteristic,
-    val value: String
-)
-
-data class SomeService(
-    val name: String
-)
-
-private object YamlParser : ConfigurableJacksonYaml(
-    KotlinModule.Builder().build()
-        .asConfigurable(
-            ObjectMapper(
-                YAMLFactory()
-                    .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
-                    .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
-                    .enable(YAMLGenerator.Feature.INDENT_ARRAYS_WITH_INDICATOR)
-            )
-        )
-        .done()
-)
