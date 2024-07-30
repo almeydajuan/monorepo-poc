@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.juanalmeyda.metadata.yaml.Characteristic.experimental
+import com.juanalmeyda.metadata.yaml.Characteristic.other
+import com.juanalmeyda.metadata.yaml.Characteristic.test
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
 import org.http4k.format.ConfigurableJacksonYaml
 import org.http4k.format.asConfigurable
@@ -21,8 +24,8 @@ class ParserV2 {
         val yamlObject = YamlObject(
             version = 1,
             service = SomeService("my-service"),
-            characteristics = listOf("test", "other", "experimental"),
-            attributes = listOf(SomeAttribute("test", "first"), SomeAttribute("other", "something"))
+            characteristics = listOf(test, other, experimental),
+            attributes = listOf(SomeAttribute(test, "first"), SomeAttribute(other, "something"))
         )
         approver.assertApproved(YamlParser.asFormatString(yamlObject), contentType = APPLICATION_YAML)
     }
@@ -31,12 +34,12 @@ class ParserV2 {
 data class YamlObject(
     val version: Int,
     val service: SomeService,
-    val characteristics: List<String>,
+    val characteristics: List<Characteristic>,
     val attributes: List<SomeAttribute>
 )
 
 data class SomeAttribute(
-    val key: String,
+    val key: Characteristic,
     val value: String
 )
 
