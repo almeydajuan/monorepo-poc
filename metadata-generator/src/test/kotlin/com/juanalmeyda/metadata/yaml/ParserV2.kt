@@ -18,14 +18,19 @@ class ParserV2 {
 
     @Test
     fun `minimum yaml`(approver: Approver) {
-        val yamlObject = YamlObject(version = 1, service = SomeService("my-service"))
+        val yamlObject = YamlObject(
+            version = 1,
+            service = SomeService("my-service"),
+            characteristics = listOf("test", "other", "experimental")
+        )
         approver.assertApproved(YamlParser.asFormatString(yamlObject), contentType = APPLICATION_YAML)
     }
 }
 
 data class YamlObject(
     val version: Int,
-    val service: SomeService
+    val service: SomeService,
+    val characteristics: List<String>
 )
 
 data class SomeService(
@@ -39,6 +44,7 @@ private object YamlParser : ConfigurableJacksonYaml(
                 YAMLFactory()
                     .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
                     .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
+                    .enable(YAMLGenerator.Feature.INDENT_ARRAYS_WITH_INDICATOR)
             )
         )
         .done()
