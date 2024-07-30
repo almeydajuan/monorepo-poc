@@ -1,6 +1,6 @@
 package com.juanalmeyda.metadata.yaml
 
-data  class YamlConfig(
+data class YamlConfig(
     val version: Int = 1,
     val serviceName: String,
     val characteristics: List<Characteristic> = emptyList(),
