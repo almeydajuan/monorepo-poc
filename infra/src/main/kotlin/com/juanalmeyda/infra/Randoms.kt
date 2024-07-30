@@ -8,7 +8,6 @@ import java.util.UUID
 /**
  * Provide controlled randomness to the various applications.
  */
-// TODO: extract to infra folder
 interface RandomsGenerator {
     operator fun <T : Value<UUID>> invoke(factory: UUIDValueFactory<T>): T
     operator fun <T : Value<String>> invoke(factory: NonBlankStringValueFactory<T>): T

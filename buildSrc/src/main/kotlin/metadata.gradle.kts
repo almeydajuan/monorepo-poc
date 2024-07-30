@@ -1,11 +1,12 @@
 import com.google.common.io.Files
 
 plugins {
-    id("library")
+    id("backend")
 }
 
 dependencies {
     implementation(project(":metadata-generator"))
+
     testImplementation(testFixtures(project(":metadata-generator")))
 }
 

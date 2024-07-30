@@ -1,5 +1,5 @@
 plugins {
-    id("library")
+    id("backend")
     `java-test-fixtures`
 }
 
