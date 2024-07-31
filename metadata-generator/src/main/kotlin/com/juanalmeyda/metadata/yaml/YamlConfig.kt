@@ -30,7 +30,8 @@ object YamlParser : ConfigurableJacksonYaml(
 
 data class YamlConfig(
     val version: Int = 1,
-    val service: Service,
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    val service: Service? = null,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val characteristics: List<Characteristic>,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

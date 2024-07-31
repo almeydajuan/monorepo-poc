@@ -41,4 +41,12 @@ class YamlBuilderTest {
         )
     }
 
+    @Test
+    fun `a yaml without service`(approver: Approver) {
+        approver.assertApproved(
+            YamlParser.asFormatString(yamlConfig.copy(service = null)),
+            contentType = APPLICATION_YAML
+        )
+    }
+
 }
