@@ -1,5 +1,6 @@
 package com.juanalmeyda.metadata.yaml
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
@@ -30,7 +31,9 @@ object YamlParser : ConfigurableJacksonYaml(
 data class YamlConfig(
     val version: Int = 1,
     val service: Service,
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val characteristics: List<Characteristic>,
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val attributes: List<Attribute>
 )
 
