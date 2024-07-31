@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import dev.forkhandles.values.StringValue
+import dev.forkhandles.values.StringValueFactory
 import org.http4k.format.ConfigurableJacksonYaml
 import org.http4k.format.asConfigurable
+import org.http4k.format.value
+import org.http4k.format.withStandardMappings
 
-// TODO: add support to microtypes
 object YamlParser : ConfigurableJacksonYaml(
     KotlinModule.Builder().build()
         .asConfigurable(
@@ -18,6 +21,9 @@ object YamlParser : ConfigurableJacksonYaml(
                     .enable(YAMLGenerator.Feature.INDENT_ARRAYS_WITH_INDICATOR)
             )
         )
+        .withStandardMappings().apply {
+            value(ServiceName)
+        }
         .done()
 )
 
@@ -34,8 +40,12 @@ data class Attribute(
 )
 
 data class Service(
-    val name: String
+    val name: ServiceName
 )
+
+class ServiceName private constructor(value: String) : StringValue(value) {
+    companion object : StringValueFactory<ServiceName>(::ServiceName)
+}
 
 @Suppress("EnumEntryName")
 enum class Characteristic {
