@@ -1,5 +1,6 @@
 plugins {
     id("library")
+    id("testFixtures")
 }
 
 dependencies {
