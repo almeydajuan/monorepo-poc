@@ -1,7 +1,7 @@
 import com.google.common.io.Files
 
 plugins {
-    id("backend")
+    id("library")
 }
 
 dependencies {
