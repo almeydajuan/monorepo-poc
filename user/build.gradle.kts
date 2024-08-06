@@ -13,3 +13,9 @@ dependencies {
 application {
     mainClass = "com.juanalmeyda.user.MainKt"
 }
+
+tasks {
+//    named("run") {
+//        dependsOn("database startup")
+//    }
+}
