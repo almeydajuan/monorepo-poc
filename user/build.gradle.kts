@@ -1,6 +1,7 @@
 plugins {
     application
     id("backend")
+    id("com.avast.gradle.docker-compose")
 }
 
 dependencies {

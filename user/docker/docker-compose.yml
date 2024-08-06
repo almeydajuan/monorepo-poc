@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16.3
+    container_name: postgres
+    command:
+      - postgres
+      - -c
+      - log_statement=all
+      - -c
+      - max_connections=500
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: user
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root_password
+    healthcheck:
+      test: pg_isready -U root -d db
+      start_period: 0s
+      interval: 1s
+      timeout: 500ms
+      retries: 10
