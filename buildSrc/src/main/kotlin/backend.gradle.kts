@@ -3,6 +3,7 @@ plugins {
     id("library")
     id("testFixtures")
     id("approve")
+    id("metadata")
 }
 
 dependencies {
