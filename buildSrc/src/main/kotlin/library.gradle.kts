@@ -8,6 +8,8 @@ repositories {
 
 dependencies {
     implementation(platform("org.http4k:http4k-bom:_"))
+    api(platform("dev.forkhandles:forkhandles-bom:_"))
+    api("dev.forkhandles:values4k:_")
 
     testImplementation(kotlin("test"))
 }

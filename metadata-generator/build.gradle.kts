@@ -1,5 +1,5 @@
 plugins {
-    id("backend")
+    id("library")
     id("testFixtures")
 }
 
