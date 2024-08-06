@@ -1,4 +1,5 @@
 plugins {
+    application
     id("library")
     id("testFixtures")
 }

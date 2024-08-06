@@ -1,5 +1,5 @@
 plugins {
-    application
+    id("backend")
     id("metadata")
     id("approve")
 }
