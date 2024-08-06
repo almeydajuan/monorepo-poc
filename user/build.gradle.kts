@@ -1,4 +1,5 @@
 plugins {
+    application
     id("backend")
 }
 
@@ -7,4 +8,8 @@ dependencies {
     implementation(Http4k.format.jackson)
 
     testApi(Testing.strikt.core)
+}
+
+application {
+    mainClass = "com.juanalmeyda.user.MainKt"
 }

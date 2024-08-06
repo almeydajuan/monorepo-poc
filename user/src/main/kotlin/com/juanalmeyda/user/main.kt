@@ -7,6 +7,6 @@ import com.juanalmeyda.user.domain.UserId
 import com.juanalmeyda.user.domain.UserName
 
 fun main() {
-    val user = User(Random(UserId), UserName.of("name"), UserAge.of(12))
+    val user = User(Random(UserId), UserName.of("name"), UserAge.of(20))
     println("Hello ${user.name}!")
 }
