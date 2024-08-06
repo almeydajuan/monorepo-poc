@@ -1,4 +1,5 @@
 plugins {
+    application
     id("metadata")
     id("approve")
 }
@@ -13,4 +14,8 @@ dependencies {
     testApi(Testing.strikt.core)
     testImplementation(Http4k.testing.approval)
     testImplementation(Http4k.format.jacksonYaml)
+}
+
+application {
+    mainClass = "com.juanalmeyda.tictactoe4k.MainKt"
 }
