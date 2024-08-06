@@ -1,7 +1,6 @@
 plugins {
     id("backend")
     id("metadata")
-    id("approve")
     id("com.avast.gradle.docker-compose")
 }
 

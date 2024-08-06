@@ -2,6 +2,7 @@ plugins {
     application
     id("library")
     id("testFixtures")
+    id("approve")
 }
 
 dependencies {
