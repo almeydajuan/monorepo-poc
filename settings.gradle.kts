@@ -1,8 +1,6 @@
 import de.fayard.refreshVersions.core.FeatureFlag.GRADLE_UPDATES
 import de.fayard.refreshVersions.core.FeatureFlag.VERSIONS_CATALOG
 
-include("infra", "tictactoe4k", "metadata-generator", "user")
-
 rootProject.name = "monorepo-poc"
 
 plugins {
@@ -20,3 +18,13 @@ refreshVersions {
         candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
     }
 }
+
+rootProject
+    .projectDir
+    .walkTopDown()
+    .maxDepth(2)
+    .filter { it.isDirectory && !it.name.contains("buildSrc") }
+    .filterNot { it == rootDir }
+    .filter { File(it, "build.gradle.kts").exists() }
+    .forEach { include(it.name) }
+
