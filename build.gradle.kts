@@ -14,21 +14,25 @@ tasks.wrapper {
 tasks {
     register("monorepoSummary") {
         group = "documentation"
-        val backendProjects = rootProject
-            .subprojects
-            .filter { File(it.name, "build.gradle.kts").readText().contains("id(\"backend\")") }
+        val backendProjects = subprojects
+            .filter { it.readyProjectConfiguration().contains("id(\"backend\")") }.map { it.name }
 
-        val libraries = rootProject
-            .subprojects
-            .filter { File(it.name, "build.gradle.kts").readText().contains("id(\"library\")") }
+        val libraries = subprojects
+            .filter { it.readyProjectConfiguration().contains("id(\"library\")") }.map { it.name }
 
         doLast {
-            logger.warnFormatted("""
-                In this monorepo, there are:
-                - ${subprojects.size} subprojects
-                - ${libraries.size} libraries
-                - ${backendProjects.size} deployable backend projects
-            """.trimIndent())
+            logger.warnFormatted(
+                """
+                In this monorepo, there are ${subprojects.size} subprojects.
+
+                From which, the are:
+                - ${backendProjects.size} deployable backend projects: $backendProjects
+                - ${libraries.size} libraries: $libraries
+            """.trimIndent()
+            )
+
         }
     }
 }
+
+fun Project.readyProjectConfiguration() = File(this.name, "build.gradle.kts").readText()
