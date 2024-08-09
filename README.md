@@ -38,24 +38,3 @@ declarative build language.
 2. To get the interpreter properly configured, you may need
    to [add the facet manually](https://www.jetbrains.com/help/idea/adding-support-for-frameworks-and-technologies.html#manually-add-facet-to-module)
 
-## Ideas
-
-In progress:
-
-- create tests and apps that spin up a db
-
-Gradle:
-
-- Configure version manager for buildSrc
-- Test plugin https://plugins.gradle.org/plugin/com.autonomousapps.dependency-analysis
-- separated Gradle tasks to run unit and integration tests
-
-Others:
-
-- generate openapi metadata
-- create a docker image with all projects together
-- create an autopipeline
-- trigger some pipelines per push
-- create tests using proxying
-- test different docker images
-- create a live documentation

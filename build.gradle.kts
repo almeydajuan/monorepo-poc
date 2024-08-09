@@ -11,3 +11,24 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+tasks {
+    register("monorepoSummary") {
+        group = "documentation"
+        val backendProjects = rootProject
+            .subprojects
+            .filter { File(it.name, "build.gradle.kts").readText().contains("id(\"backend\")") }
+
+        val libraries = rootProject
+            .subprojects
+            .filter { File(it.name, "build.gradle.kts").readText().contains("id(\"library\")") }
+
+        doLast {
+            logger.warnFormatted("""
+                In this monorepo, there are:
+                - ${subprojects.size} subprojects
+                - ${libraries.size} libraries
+                - ${backendProjects.size} deployable backend projects
+            """.trimIndent())
+        }
+    }
+}
