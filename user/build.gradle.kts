@@ -15,7 +15,10 @@ application {
 }
 
 tasks {
-//    named("run") {
-//        dependsOn("database startup")
-//    }
+    dockerCompose.isRequiredBy(test)
+    dockerCompose.isRequiredBy(run)
+
+    dockerCompose {
+        useComposeFiles = listOf("docker/docker-compose.yml")
+    }
 }
