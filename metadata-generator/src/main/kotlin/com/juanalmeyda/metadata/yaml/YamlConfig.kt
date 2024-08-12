@@ -29,22 +29,10 @@ object YamlParser : ConfigurableJacksonYaml(
 )
 
 data class YamlConfig(
-    val version: Int = 1,
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    val service: Service? = null,
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    val characteristics: List<Characteristic>,
+    val serviceName: ServiceName,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     val attributes: List<Attribute>
-)
-
-data class Attribute(
-    val key: Characteristic,
-    val value: String
-)
-
-data class Service(
-    val name: ServiceName
 )
 
 class ServiceName private constructor(value: String) : StringValue(value) {
@@ -52,8 +40,8 @@ class ServiceName private constructor(value: String) : StringValue(value) {
 }
 
 @Suppress("EnumEntryName")
-enum class Characteristic {
-    test,
-    experimental,
-    other
+enum class Attribute {
+    backend,
+    frontend,
+    database
 }

@@ -1,5 +1,4 @@
-serviceName: my-service
+serviceName: User Service
 attributes:
   - backend
-  - frontend
   - database

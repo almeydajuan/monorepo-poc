@@ -1,7 +1,1 @@
-version: 1
-service:
-  name: my-service
-characteristics:
-  - test
-  - other
-  - experimental
+serviceName: my-service
