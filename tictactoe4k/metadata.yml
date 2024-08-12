@@ -1,4 +1,4 @@
-serviceName: Tic Tac Service
+service_name: Tic Tac Service
 attributes:
   - backend
   - frontend

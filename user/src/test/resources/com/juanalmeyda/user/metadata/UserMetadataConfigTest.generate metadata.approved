@@ -1,4 +1,4 @@
-serviceName: User Service
+service_name: User Service
 attributes:
   - backend
   - database

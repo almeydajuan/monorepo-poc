@@ -1,4 +1,4 @@
-serviceName: my-service
+service_name: my-service
 attributes:
   - backend
   - frontend
