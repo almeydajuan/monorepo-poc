@@ -7,6 +7,10 @@ dependencies {
     implementation(Http4k.core)
     implementation(Http4k.format.jackson)
 
+    implementation(JetBrains.exposed.core)
+    implementation(JetBrains.exposed.jdbc)
+    implementation("org.postgresql:postgresql:_")
+
     testApi(Testing.strikt.core)
 }
 
@@ -15,8 +19,9 @@ application {
 }
 
 tasks {
-    dockerCompose.isRequiredBy(test)
-    dockerCompose.isRequiredBy(run)
+    // FIXME: docker compose requires manual start for now
+//    dockerCompose.isRequiredBy(test)
+//    dockerCompose.isRequiredBy(run)
 
     dockerCompose {
         useComposeFiles = listOf("docker/docker-compose.yml")
