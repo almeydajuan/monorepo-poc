@@ -19,9 +19,8 @@ application {
 }
 
 tasks {
-    // FIXME: docker compose requires manual start for now
-//    dockerCompose.isRequiredBy(test)
-//    dockerCompose.isRequiredBy(run)
+    dockerCompose.isRequiredBy(test)
+    dockerCompose.isRequiredBy(run)
 
     dockerCompose {
         useComposeFiles = listOf("docker/docker-compose.yml")
