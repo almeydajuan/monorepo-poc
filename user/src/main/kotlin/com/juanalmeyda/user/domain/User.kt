@@ -12,10 +12,10 @@ import java.util.UUID
 
 data class User(val id: UserId, val name: UserName, val age: UserAge) {
     companion object {
-        val Juan = User(
+        fun newRandomUser() = User(
             id = Random(UserId),
-            name = UserName.of("Juan"),
-            age = UserAge.of(20)
+            name = UserName.of(UUID.randomUUID().toString()),
+            age = UserAge.of((18..50).random())
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.juanalmeyda.user.repository
 
-import com.juanalmeyda.user.domain.User.Companion.Juan
+import com.juanalmeyda.user.domain.User
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
@@ -11,21 +11,23 @@ interface UserRepositoryContractTest {
 
     @Test
     fun `do not find user`() {
-        expectThat(userRepository.findById(Juan.id)).isNull()
+        expectThat(userRepository.findById(User.newRandomUser().id)).isNull()
     }
 
     @Test
     fun `find user`() {
-        userRepository.save(Juan)
+        val user = User.newRandomUser()
+        userRepository.save(user)
 
-        expectThat(userRepository.findById(Juan.id)).isEqualTo(Juan)
+        expectThat(userRepository.findById(user.id)).isEqualTo(user)
     }
 
     @Test
     fun `delete user`() {
-        userRepository.save(Juan)
-        userRepository.delete(Juan.id)
+        val user = User.newRandomUser()
+        userRepository.save(user)
+        userRepository.delete(user.id)
 
-        expectThat(userRepository.findById(Juan.id)).isNull()
+        expectThat(userRepository.findById(user.id)).isNull()
     }
 }
