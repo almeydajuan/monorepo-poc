@@ -7,27 +7,43 @@ import strikt.assertions.isEqualTo
 import strikt.assertions.isNull
 
 interface UserRepositoryContractTest {
-    val userRepository: UserRepository
+    val userAppStorage: UserAppStorage
 
     @Test
     fun `do not find user`() {
-        expectThat(userRepository.findById(User.newRandomUser().id)).isNull()
+        expectThat(
+            userAppStorage.transactor.replica {
+                userAppStorage.userRepository.findById(User.newRandomUser().id)
+            }
+        ).isNull()
     }
 
     @Test
     fun `find user`() {
         val user = User.newRandomUser()
-        userRepository.save(user)
+        userAppStorage.transactor.primary {
+            userAppStorage.userRepository.save(user)
+        }
 
-        expectThat(userRepository.findById(user.id)).isEqualTo(user)
+        expectThat(
+            userAppStorage.transactor.replica {
+                userAppStorage.userRepository.findById(user.id)
+            }
+        ).isEqualTo(user)
     }
 
     @Test
     fun `delete user`() {
         val user = User.newRandomUser()
-        userRepository.save(user)
-        userRepository.delete(user.id)
+        userAppStorage.transactor.primary {
+            userAppStorage.userRepository.save(user)
+            userAppStorage.userRepository.delete(user.id)
+        }
 
-        expectThat(userRepository.findById(user.id)).isNull()
+        expectThat(
+            userAppStorage.transactor.replica {
+                userAppStorage.userRepository.findById(user.id)
+            }
+        ).isNull()
     }
 }
