@@ -1,6 +1,3 @@
-import com.avast.gradle.dockercompose.tasks.ComposeDown
-import com.avast.gradle.dockercompose.tasks.ComposeUp
-
 plugins {
     id("backend")
     id("database")
@@ -21,21 +18,3 @@ application {
     mainClass = "com.juanalmeyda.user.MainKt"
 }
 
-tasks {
-    // TODO: move this up to a convention plugin
-    dockerCompose.isRequiredBy(test)
-    dockerCompose.isRequiredBy(run)
-
-    val composeUp = named<ComposeUp>("composeUp")
-    val composeDown = named<ComposeDown>("composeDown")
-
-    val testsWithDatabase by registering(Test::class) {
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        description = "Tests with database"
-        useJUnitPlatform {
-            includeTags("withDatabase")
-        }
-        dependsOn(composeUp)
-        finalizedBy(composeDown)
-    }
-}
