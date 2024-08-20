@@ -3,7 +3,7 @@ import com.avast.gradle.dockercompose.tasks.ComposeUp
 
 plugins {
     id("backend")
-    id("com.avast.gradle.docker-compose")
+    id("database")
 }
 
 dependencies {
