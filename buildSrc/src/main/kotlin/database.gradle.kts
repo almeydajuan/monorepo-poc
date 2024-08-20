@@ -7,16 +7,14 @@ tasks {
         useComposeFiles = listOf("src/test/resources/docker-compose.yml")
     }
 
+    // TODO: add this task to the check lifecycle
     val testsWithDatabase by registering(Test::class) {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         description = "Tests with database"
         useJUnitPlatform {
-            includeTags("withDatabase")
+            includeTags(databaseTestTag)
         }
     }
-
-    // TODO: do not require this
-    dockerCompose.isRequiredBy(named("test"))
 
     dockerCompose.isRequiredBy(named("run"))
     dockerCompose.isRequiredBy(testsWithDatabase)
