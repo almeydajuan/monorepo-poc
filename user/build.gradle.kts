@@ -26,10 +26,6 @@ tasks {
     dockerCompose.isRequiredBy(test)
     dockerCompose.isRequiredBy(run)
 
-    dockerCompose {
-        useComposeFiles = listOf("docker/docker-compose.yml")
-    }
-
     val composeUp = named<ComposeUp>("composeUp")
     val composeDown = named<ComposeDown>("composeDown")
 
