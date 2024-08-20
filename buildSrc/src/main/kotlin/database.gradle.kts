@@ -7,7 +7,6 @@ tasks {
         useComposeFiles = listOf("src/test/resources/docker-compose.yml")
     }
 
-    // TODO: add this task to the check lifecycle
     val testsWithDatabase by registering(Test::class) {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         description = "Tests with database"
