@@ -16,6 +16,10 @@ tasks {
         }
     }
 
+    named("check").configure {
+        dependsOn(testsWithDatabase)
+    }
+
     dockerCompose.isRequiredBy(named("run"))
     dockerCompose.isRequiredBy(testsWithDatabase)
 }
