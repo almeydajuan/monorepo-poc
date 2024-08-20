@@ -13,11 +13,3 @@ dependencies {
 }
 
 
-tasks {
-    val testsWithDatabase by registering(Test::class) {
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        useJUnitPlatform {
-            includeTags("withDatabase")
-        }
-    }
-}
