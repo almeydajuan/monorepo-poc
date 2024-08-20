@@ -1,3 +1,4 @@
+import com.avast.gradle.dockercompose.tasks.ComposeDown
 import com.avast.gradle.dockercompose.tasks.ComposeUp
 
 plugins {
@@ -30,6 +31,7 @@ tasks {
     }
 
     val composeUp = named<ComposeUp>("composeUp")
+    val composeDown = named<ComposeDown>("composeDown")
 
     val testsWithDatabase by registering(Test::class) {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
@@ -38,5 +40,6 @@ tasks {
             includeTags("withDatabase")
         }
         dependsOn(composeUp)
+        finalizedBy(composeDown)
     }
 }
