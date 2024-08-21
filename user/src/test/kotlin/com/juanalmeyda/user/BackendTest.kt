@@ -5,7 +5,7 @@ import com.juanalmeyda.user.domain.User
 import com.juanalmeyda.user.domain.UserAge
 import com.juanalmeyda.user.domain.UserId
 import com.juanalmeyda.user.domain.UserName
-import com.juanalmeyda.user.repository.InMemoryUserRepository
+import com.juanalmeyda.user.repository.InMemoryUserAppStorage
 import org.http4k.core.Method.DELETE
 import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
@@ -20,7 +20,7 @@ import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
 class BackendTest {
-    private val backend = newBackend(InMemoryUserRepository())
+    private val backend = newBackend(InMemoryUserAppStorage())
 
     private val juan = User(
         id = Random(UserId),

@@ -2,12 +2,16 @@ package com.juanalmeyda.user
 
 import com.juanalmeyda.user.domain.User
 import com.juanalmeyda.user.domain.UserId
-import com.juanalmeyda.user.repository.UserRepository
+import com.juanalmeyda.user.repository.UserAppStorage
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
-import org.http4k.core.Method
+import org.http4k.core.Method.DELETE
+import org.http4k.core.Method.GET
+import org.http4k.core.Method.POST
 import org.http4k.core.Response
-import org.http4k.core.Status
+import org.http4k.core.Status.Companion.CREATED
+import org.http4k.core.Status.Companion.NOT_FOUND
+import org.http4k.core.Status.Companion.OK
 import org.http4k.core.with
 import org.http4k.format.Jackson.auto
 import org.http4k.lens.Query
@@ -18,24 +22,26 @@ val userLens = Body.auto<User>().toLens()
 val userIdLens = Query.auto<UserId>().required("userId")
 
 
-fun newBackend(repository: UserRepository): HttpHandler {
+fun newBackend(storage: UserAppStorage): HttpHandler {
     return routes(
-        "/user" bind Method.GET to { request ->
+        "/user" bind GET to { request ->
             val userId = userIdLens(request)
 
-            repository.findById(userId)?.let {
-                Response(Status.OK).with(userLens of it)
-            } ?: Response(Status.NOT_FOUND)
+            storage.transactor.replica { storage.userRepository.findById(userId) }?.let {
+                Response(OK).with(userLens of it)
+            } ?: Response(NOT_FOUND)
         },
-        "/user" bind Method.POST to { request ->
-            repository.save(userLens(request))
+        "/user" bind POST to { request ->
+            storage.transactor.primary {
+                storage.userRepository.save(userLens(request))
+            }
 
-            Response(Status.CREATED)
+            Response(CREATED)
         },
-        "/user" bind Method.DELETE to { request ->
-            repository.delete(userIdLens(request))
+        "/user" bind DELETE to { request ->
+            storage.transactor.primary { storage.userRepository.delete(userIdLens(request)) }
 
-            Response(Status.OK)
+            Response(OK)
         }
     )
 }
