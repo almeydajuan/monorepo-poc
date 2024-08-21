@@ -1,12 +1,11 @@
 package com.juanalmeyda.user
 
-import com.juanalmeyda.infra.RandomsGenerator.Companion.Random
-import com.juanalmeyda.user.domain.User
-import com.juanalmeyda.user.domain.UserAge
-import com.juanalmeyda.user.domain.UserId
-import com.juanalmeyda.user.domain.UserName
+import com.juanalmeyda.user.repository.DatabaseUserAppStorage
+import org.http4k.server.Jetty
+import org.http4k.server.asServer
 
 fun main() {
-    val user = User(Random(UserId), UserName.of("name"), UserAge.of(20))
-    println("Hello ${user.name}!")
+    newBackend(DatabaseUserAppStorage()).asServer(Jetty(port = 1234)).start()
+
+    println("Started on http://localhost:8080")
 }
