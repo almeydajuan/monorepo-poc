@@ -16,15 +16,13 @@ import java.util.UUID
 
 class PostgresUserRepository : UserRepository {
     override fun findById(id: UserId) = transaction {
-        Users.selectAll().where { Users.id eq id.value }.firstOrNull()?.let {
-            mapToUser(it)
-        }
+        Users.selectAll().where { Users.id eq id.value }.firstOrNull()?.mapToUser()
     }
 
-    private fun mapToUser(row: ResultRow) = User(
-        id = UserId.of(row[Users.id]),
-        name = UserName.of(row[Users.name]),
-        age = UserAge.of(row[Users.age]),
+    private fun ResultRow.mapToUser() = User(
+        id = UserId.of(this[Users.id]),
+        name = UserName.of(this[Users.name]),
+        age = UserAge.of(this[Users.age]),
     )
 
     override fun save(user: User) {
