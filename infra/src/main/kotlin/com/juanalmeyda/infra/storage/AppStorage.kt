@@ -4,6 +4,7 @@ import dev.forkhandles.result4k.Result4k
 import dev.forkhandles.result4k.peekFailure
 import org.http4k.cloudnative.health.Completed
 import org.http4k.cloudnative.health.ReadinessCheck
+import org.http4k.config.Environment
 import org.jetbrains.exposed.sql.Database.Companion.connect
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -27,18 +28,19 @@ interface AppStorageTransactor {
 /**
  * Provides database transactor and readiness checks for services
  */
-open class DatabaseAppStorage : AppStorage {
-    override val transactor = ExposedAppStorageTransactor()
+open class DatabaseAppStorage(env: Environment) : AppStorage {
+    override val transactor = ExposedAppStorageTransactor(env)
     override val readinessCheck by lazy { DatabaseReadinessCheck(transactor) }
 }
 
-class ExposedAppStorageTransactor : AppStorageTransactor {
+class ExposedAppStorageTransactor(env: Environment) : AppStorageTransactor {
+    private val dbName = env[DatabaseEnv.DATABASE_NAME]
+    private val schemaName = env[DatabaseEnv.SCHEMA_NAME]
+    private val appUser = env[DatabaseEnv.DATABASE_USER]
+    private val appPassword = env[DatabaseEnv.DATABASE_PASSWORD]
+    private val url = "jdbc:postgresql://localhost:5432/$dbName?currentSchema=$schemaName"
 
-    // TODO: send via env vars
-    private val url = "jdbc:postgresql://localhost:5432/user_db?currentSchema=user_schema"
     private val driver = "org.postgresql.Driver"
-    private val appUser = "juan"
-    private val appPassword = "juan_password"
 
     private val primaryDb = connect(
         url = url,
