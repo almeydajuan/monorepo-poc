@@ -43,7 +43,7 @@ tasks {
     }
 
     dockerCompose {
-        useComposeFiles = listOf("src/test/resources/docker-compose.yml")
+        useComposeFiles = listOf("src/main/resources/docker-compose.yml")
 
         isRequiredBy(named("run"))
         isRequiredBy(testsWithDatabase)
