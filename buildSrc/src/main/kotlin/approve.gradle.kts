@@ -4,7 +4,7 @@ plugins {
 
 tasks {
    register<Task>("approve") {
-        group = "verification"
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
         description = "Approve `*.actual` files in the projects scope"
 
         fileTree(projectDir)
