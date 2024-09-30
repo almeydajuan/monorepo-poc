@@ -1,10 +1,12 @@
+import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
+
 plugins {
-    id("library")
+    kotlin("jvm")
 }
 
 tasks {
-   register<Task>("approve") {
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
+    register<Task>("approve") {
+        group = VERIFICATION_GROUP
         description = "Approve `*.actual` files in the projects scope"
 
         fileTree(projectDir)
