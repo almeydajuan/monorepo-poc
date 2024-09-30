@@ -15,5 +15,5 @@ dependencies {
 
     testImplementation(Kotlin.test)
     testImplementation(Testing.strikt.core)
-    testFixturesApi(testFixtures(project(":infra")))
+    testFixturesApi(testFixtures(projects.infra))
 }

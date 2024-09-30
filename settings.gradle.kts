@@ -28,3 +28,5 @@ rootProject
     .filter { File(it, "build.gradle.kts").exists() }
     .forEach { include(it.name) }
 
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
