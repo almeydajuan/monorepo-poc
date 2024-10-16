@@ -8,11 +8,14 @@ import kotlin.test.BeforeTest
 
 @WithDatabase
 class PostgresRepositoryTest : RepositoryTest {
+    private val host = System.getenv("PSQL_HOST")
+    private val port = System.getenv("PSQL_TCP_5432")
+
     override val record = Record(id = 1, value = "Foo")
     override val repository = PostgresRepository("records")
     override val transactor = PostgresTransactor(
         Database.connect(
-            url = "jdbc:postgresql://localhost/postgres",
+            url = "jdbc:postgresql://$host:$port/postgres",
             driver = "org.postgresql.Driver",
             user = "postgres"
         )
