@@ -1,0 +1,42 @@
+name: Build
+on:
+  push:
+    branches:
+      - 'master'
+    paths-ignore:
+      - '**/*.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Setup JVM
+        uses: actions/setup-java@v4.3.0
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+      - name: Setup docker compose
+        uses: ndeloof/install-compose-action@v0.0.1
+        with:
+          legacy: true    # will also install in PATH as `docker-compose`
+      - name: Cache Gradle packages
+        uses: actions/cache@v4.0.2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build
+        timeout-minutes: 25
+        run: ./gradlew check
+      - name: Cleanup Gradle Cache
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
