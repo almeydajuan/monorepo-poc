@@ -1,23 +1,10 @@
 plugins {
-    kotlin("jvm")
+    id("library")
     id("approve")
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation(Kotlin.test)
-    testImplementation(Testing.junit.jupiter)
-
-    // TODO - cleanup library.gradle so we can use BOM here properly
-    testImplementation("org.http4k:http4k-format-jackson:_")
-    testImplementation("org.http4k:http4k-testing-approval:_")
-}
-
-tasks {
-    test {
-        useJUnitPlatform()
-    }
+    testImplementation(Http4k.core)
+    testImplementation(Http4k.format.jackson)
+    testImplementation(Http4k.testing.approval)
 }
