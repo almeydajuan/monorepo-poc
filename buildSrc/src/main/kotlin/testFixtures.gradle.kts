@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     testFixturesApi(Testing.junit.jupiter.api)
-    testFixturesImplementation(Http4k.testing.approval)
-    testFixturesImplementation(Http4k.format.jacksonYaml)
+    testFixturesImplementation("org.http4k:http4k-testing-approval:_")
+    testFixturesImplementation("org.http4k:http4k-format-jackson-yaml:_")
 }
 
