@@ -8,8 +8,8 @@ import kotlin.test.BeforeTest
 
 @WithDatabase
 class PostgresRepositoryTest : RepositoryTest {
-    private val host = System.getenv("PSQL_HOST")
-    private val port = System.getenv("PSQL_TCP_5432")
+    private val host = System.getenv("POSTGRES_HOST")
+    private val port = System.getenv("POSTGRES_TCP_5432")
 
     override val record = Record(id = 1, value = "Foo")
     override val repository = PostgresRepository("records")
