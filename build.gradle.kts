@@ -20,6 +20,9 @@ tasks {
         val libraries = subprojects
             .filter { it.readyProjectConfiguration().contains("id(\"library\")") }.map { it.name }
 
+        val testingProjects = subprojects
+            .filter { it.readyProjectConfiguration().contains("id(\"testingProject\")") }.map { it.name }
+
         doLast {
             logger.warnFormatted(
                 """
@@ -28,6 +31,7 @@ tasks {
                 From which, the are:
                 - ${backendProjects.size} deployable backend projects: $backendProjects
                 - ${libraries.size} libraries: $libraries
+                - ${testingProjects.size} helper testing projects: $testingProjects
             """.trimIndent()
             )
 
