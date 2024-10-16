@@ -1,6 +1,5 @@
 services:
   postgres:
-    container_name: test_postgres_db
     image: postgres:latest
     ports:
       - "5432"
