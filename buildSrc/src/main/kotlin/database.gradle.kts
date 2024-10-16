@@ -5,6 +5,12 @@ plugins {
     id("com.avast.gradle.docker-compose")
 }
 
+dependencies {
+    implementation(JetBrains.exposed.core)
+    implementation(JetBrains.exposed.jdbc)
+    implementation("org.postgresql:postgresql:_")
+}
+
 tasks {
     test {
         useJUnitPlatform {
