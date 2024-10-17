@@ -1,11 +1,10 @@
 name: Build
 on:
   push:
+    paths:
+      - 'user/**'
     branches:
       - 'main'
-    paths-ignore:
-      - '**/*.md'
-      - 'user/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,9 +33,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build
+      - name: Check User
         timeout-minutes: 25
-        run: ./gradlew check
+        run: ./gradlew user:check
       - name: Cleanup Gradle Cache
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
