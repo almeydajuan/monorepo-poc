@@ -7,7 +7,7 @@ on:
       - '**/*.md'
       - 'user/**'
 jobs:
-  build:
+  buildWholeProject:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
