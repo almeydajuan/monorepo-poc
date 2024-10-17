@@ -1,14 +1,12 @@
 name: Build
 on:
   push:
+    paths:
+      - 'tictactoe4k/**'
     branches:
       - 'main'
-    paths-ignore:
-      - '**/*.md'
-      - 'user/**'
-      - 'tictactoe4k/**'
 jobs:
-  checkAll:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,10 +20,6 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: gradle
-      - name: Setup docker compose
-        uses: ndeloof/install-compose-action@v0.0.1
-        with:
-          legacy: true    # will also install in PATH as `docker-compose`
       - name: Cache Gradle packages
         uses: actions/cache@v4.0.2
         with:
@@ -35,9 +29,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Check All
-        timeout-minutes: 10
-        run: ./gradlew check
+      - name: Check TicTacToe
+        timeout-minutes: 25
+        run: ./gradlew tictactoe4k:check
       - name: Cleanup Gradle Cache
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
