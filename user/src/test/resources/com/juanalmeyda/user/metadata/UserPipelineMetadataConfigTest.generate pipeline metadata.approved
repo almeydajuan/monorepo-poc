@@ -5,3 +5,12 @@ on:
       - user/**
     branches:
       - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
