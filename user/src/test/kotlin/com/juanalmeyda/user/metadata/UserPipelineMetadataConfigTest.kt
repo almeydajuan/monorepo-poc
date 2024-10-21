@@ -61,31 +61,21 @@ class UserPipelineMetadataConfigTest {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class SetupJvmStep(
         val uses: String = "actions/setup-java@v4.3.0",
-        val with: SetupJvmStepConfig = SetupJvmStepConfig()
+        val with: Map<String, Any> = mapOf(
+            "distribution" to "temurin",
+            "java-version" to 21,
+            "cache" to "gradle"
+        )
     ) : PipelineStep("Setup JVM")
-
-    // TODO: convert configs into maps
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    data class SetupJvmStepConfig(
-        val distribution: String = "temurin",
-        @JsonProperty("java-version")
-        val javaVersion: Int = 21,
-        val cache: String = "gradle"
-    )
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class CheckoutStep(
         val uses: String = "actions/checkout@v4.1.7",
-        val with: CheckoutStepConfiguration = CheckoutStepConfiguration()
+        val with: Map<String, Any> = mapOf(
+            "fetch-depth" to 1,
+            "persist-credentials" to false
+        )
     ) : PipelineStep("Checkout")
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    data class CheckoutStepConfiguration(
-        @JsonProperty("fetch-depth")
-        val fetchDepth: Int = 1,
-        @JsonProperty("persist-credentials")
-        val persistCredentials: Boolean = false
-    )
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class GithubEvent(
