@@ -2,6 +2,7 @@ package com.juanalmeyda.user.metadata
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import com.juanalmeyda.metadata.yaml.PipelineYamlParser
 import com.juanalmeyda.metadata.yaml.parse
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
@@ -50,15 +51,17 @@ class UserPipelineMetadataConfigTest {
     data class Workflow(
         @JsonProperty("runs-on")
         val runsOn: String = "ubuntu-latest",
-        val steps: List<CheckoutStep>
+        val steps: List<PipelineStep>
     )
+
+    @JsonPropertyOrder("name")
+    sealed class PipelineStep(val name: String)
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class CheckoutStep(
-        val name: String = "Checkout",
         val uses: String = "actions/checkout@v4.1.7",
         val with: CheckoutStepConfiguration = CheckoutStepConfiguration()
-    )
+    ) : PipelineStep("Checkout")
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class CheckoutStepConfiguration(
