@@ -1,7 +1,7 @@
 package com.juanalmeyda.user.metadata
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.juanalmeyda.metadata.yaml.YamlParser
+import com.juanalmeyda.metadata.yaml.PipelineYamlParser
 import com.juanalmeyda.metadata.yaml.parse
 import org.http4k.core.ContentType.Companion.APPLICATION_YAML
 import org.http4k.testing.Approver
@@ -16,7 +16,7 @@ class UserPipelineMetadataConfigTest {
     @Test
     fun `generate pipeline metadata`(approver: Approver) {
         approver.assertApproved(
-            YamlParser.parse(PipelineMetadata("User", "user").toPipelineRepresentation()),
+            PipelineYamlParser.parse(PipelineMetadata("User", "user").toPipelineRepresentation()),
             APPLICATION_YAML
         )
     }
