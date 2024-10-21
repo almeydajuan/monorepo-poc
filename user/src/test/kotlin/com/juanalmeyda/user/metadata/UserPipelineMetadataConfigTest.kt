@@ -23,7 +23,8 @@ class UserPipelineMetadataConfigTest {
                     name = "User",
                     pathPrefix = "user",
                     pipelineSteps = listOf(
-                        CheckoutStep()
+                        CheckoutStep(),
+                        SetupJvmStep()
                     )
                 ).toPipelineRepresentation()
             ),
@@ -34,7 +35,7 @@ class UserPipelineMetadataConfigTest {
     data class PipelineMetadata(
         val name: String,
         val pathPrefix: String,
-        val pipelineSteps: List<CheckoutStep>
+        val pipelineSteps: List<PipelineStep>
     )
 
     data class PipelineRepresentation(
@@ -56,6 +57,21 @@ class UserPipelineMetadataConfigTest {
 
     @JsonPropertyOrder("name")
     sealed class PipelineStep(val name: String)
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class SetupJvmStep(
+        val uses: String = "actions/setup-java@v4.3.0",
+        val with: SetupJvmStepConfig = SetupJvmStepConfig()
+    ) : PipelineStep("Setup JVM")
+
+    // TODO: convert configs into maps
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class SetupJvmStepConfig(
+        val distribution: String = "temurin",
+        @JsonProperty("java-version")
+        val javaVersion: Int = 21,
+        val cache: String = "gradle"
+    )
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class CheckoutStep(

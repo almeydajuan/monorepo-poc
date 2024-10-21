@@ -14,3 +14,9 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
+      - name: Setup JVM
+        uses: actions/setup-java@v4.3.0
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
