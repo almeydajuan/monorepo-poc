@@ -17,14 +17,23 @@ class UserPipelineMetadataConfigTest {
     @Test
     fun `generate pipeline metadata`(approver: Approver) {
         approver.assertApproved(
-            PipelineYamlParser.parse(PipelineMetadata("User", "user").toPipelineRepresentation()),
+            PipelineYamlParser.parse(
+                PipelineMetadata(
+                    name = "User",
+                    pathPrefix = "user",
+                    pipelineSteps = listOf(
+                        CheckoutStep()
+                    )
+                ).toPipelineRepresentation()
+            ),
             APPLICATION_YAML
         )
     }
 
     data class PipelineMetadata(
         val name: String,
-        val pathPrefix: String
+        val pathPrefix: String,
+        val pipelineSteps: List<CheckoutStep>
     )
 
     data class PipelineRepresentation(
@@ -77,14 +86,7 @@ class UserPipelineMetadataConfigTest {
                 paths = listOf("$pathPrefix/**")
             )
         ),
-        jobs = Jobs(
-            build = Workflow(
-                // TODO: list of steps should be injected
-                steps = listOf(
-                    CheckoutStep()
-                )
-            )
-        )
+        jobs = Jobs(build = Workflow(steps = pipelineSteps))
     )
 
 }
