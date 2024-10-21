@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
         with:
-          fetch-depth: 2
+          fetch-depth: 1
           persist-credentials: false
       - name: Setup JVM
         uses: actions/setup-java@v4.3.0

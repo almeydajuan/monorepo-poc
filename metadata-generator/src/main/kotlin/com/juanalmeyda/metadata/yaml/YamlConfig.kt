@@ -21,6 +21,7 @@ object YamlParser : ConfigurableJacksonYaml(
                     .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
                     .enable(YAMLGenerator.Feature.MINIMIZE_QUOTES)
                     .enable(YAMLGenerator.Feature.INDENT_ARRAYS_WITH_INDICATOR)
+                    .disable(YAMLGenerator.Feature.SPLIT_LINES)
             )
         )
         .withStandardMappings().apply {
@@ -28,6 +29,8 @@ object YamlParser : ConfigurableJacksonYaml(
         }
         .done()
 )
+
+fun YamlParser.parse(input: Any) = this.asFormatString(input).replace("\"on\"", "on")
 
 data class YamlConfig(
     @JsonProperty("service_name")

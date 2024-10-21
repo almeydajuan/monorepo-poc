@@ -1,1 +1,7 @@
 name: User
+on:
+  push:
+    paths:
+      - user/**
+    branches:
+      - main
