@@ -20,3 +20,7 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: gradle
+      - name: Setup docker compose
+        uses: ndeloof/install-compose-action@v0.0.1
+        with:
+          legacy: true

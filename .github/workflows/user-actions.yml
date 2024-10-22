@@ -23,7 +23,7 @@ jobs:
       - name: Setup docker compose
         uses: ndeloof/install-compose-action@v0.0.1
         with:
-          legacy: true    # will also install in PATH as `docker-compose`
+          legacy: true
       - name: Cache Gradle packages
         uses: actions/cache@v4.0.2
         with:

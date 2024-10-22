@@ -24,7 +24,8 @@ class UserPipelineMetadataConfigTest {
                     pathPrefix = "user",
                     pipelineSteps = listOf(
                         CheckoutStep(),
-                        SetupJvmStep()
+                        SetupJvmStep(),
+                        SetupDockerStep()
                     )
                 ).toPipelineRepresentation()
             ),
@@ -57,6 +58,12 @@ class UserPipelineMetadataConfigTest {
 
     @JsonPropertyOrder("name")
     sealed class PipelineStep(val name: String)
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class SetupDockerStep(
+        val uses: String = "ndeloof/install-compose-action@v0.0.1",
+        val with: Map<String, Any> = mapOf("legacy" to true,)
+    ) : PipelineStep("Setup docker compose")
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class SetupJvmStep(
