@@ -27,7 +27,8 @@ class UserPipelineMetadataConfigTest {
                         SetupJvmStep(),
                         SetupDockerStep(),
                         GradleCachePackagesStep(),
-                        CheckUserStep()
+                        CheckUserStep(),
+                        CleanupGradleCacheStep()
                     )
                 ).toPipelineRepresentation()
             ),
@@ -60,6 +61,11 @@ class UserPipelineMetadataConfigTest {
 
     @JsonPropertyOrder("name")
     sealed class PipelineStep(val name: String)
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class CleanupGradleCacheStep(
+        val run: String = "rm -f ~/.gradle/caches/modules-2/modules-2.lock ~/.gradle/caches/modules-2/gc.properties"
+    ) : PipelineStep("Cleanup Gradle Cache")
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class CheckUserStep(
