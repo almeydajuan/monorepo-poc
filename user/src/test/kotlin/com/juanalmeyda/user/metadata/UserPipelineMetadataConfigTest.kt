@@ -26,7 +26,8 @@ class UserPipelineMetadataConfigTest {
                         CheckoutStep(),
                         SetupJvmStep(),
                         SetupDockerStep(),
-                        GradleCachePackagesStep()
+                        GradleCachePackagesStep(),
+                        CheckUserStep()
                     )
                 ).toPipelineRepresentation()
             ),
@@ -59,6 +60,13 @@ class UserPipelineMetadataConfigTest {
 
     @JsonPropertyOrder("name")
     sealed class PipelineStep(val name: String)
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class CheckUserStep(
+        @JsonProperty("timeout-minutes")
+        val timeoutMinutes: Int = 25,
+        val run: String = "./gradlew user:check"
+    ) : PipelineStep("Check User")
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     data class GradleCachePackagesStep(
