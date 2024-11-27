@@ -24,3 +24,9 @@ jobs:
         uses: ndeloof/install-compose-action@v0.0.1
         with:
           legacy: true
+      - name: Cache Gradle packages
+        uses: actions/cache@v4.0.2
+        with:
+          path: "~/.gradle/caches:~/.gradle/wrapper"
+          key: "${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}"
+          restore-keys: "${{ runner.os }}-gradle"

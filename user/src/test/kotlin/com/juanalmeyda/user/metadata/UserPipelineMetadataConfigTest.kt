@@ -25,7 +25,8 @@ class UserPipelineMetadataConfigTest {
                     pipelineSteps = listOf(
                         CheckoutStep(),
                         SetupJvmStep(),
-                        SetupDockerStep()
+                        SetupDockerStep(),
+                        GradleCachePackagesStep()
                     )
                 ).toPipelineRepresentation()
             ),
@@ -60,9 +61,19 @@ class UserPipelineMetadataConfigTest {
     sealed class PipelineStep(val name: String)
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    data class GradleCachePackagesStep(
+        val uses: String = "actions/cache@v4.0.2",
+        val with: Map<String, Any> = mapOf(
+            "path" to "~/.gradle/caches:~/.gradle/wrapper",
+            "key" to "\${{ runner.os }}-gradle-\${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}",
+            "restore-keys" to "\${{ runner.os }}-gradle"
+        )
+    ) : PipelineStep("Cache Gradle packages")
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     data class SetupDockerStep(
         val uses: String = "ndeloof/install-compose-action@v0.0.1",
-        val with: Map<String, Any> = mapOf("legacy" to true,)
+        val with: Map<String, Any> = mapOf("legacy" to true)
     ) : PipelineStep("Setup docker compose")
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
