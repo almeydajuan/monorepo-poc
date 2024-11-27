@@ -27,12 +27,9 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v4.0.2
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
+          path: ~/.gradle/caches:~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          restore-keys: ${{ runner.os }}-gradle-
       - name: Check User
         timeout-minutes: 25
         run: ./gradlew user:check
