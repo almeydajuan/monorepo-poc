@@ -16,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 class UserPipelineMetadataConfigTest {
 
     @Test
-    fun `generate pipeline metadata`(approver: Approver) {
+    fun `user-actions`(approver: Approver) {
         approver.assertApproved(
             PipelineMetadata(
                 name = "User",
