@@ -1,4 +1,4 @@
-package com.juanalmeyda.user.metadata
+package com.juanalmeyda.webapp.metadata
 
 import com.juanalmeyda.metadata.PipelineMetadataConfigTest
 import com.juanalmeyda.metadata.yaml.CheckStep
@@ -6,20 +6,18 @@ import com.juanalmeyda.metadata.yaml.CheckoutStep
 import com.juanalmeyda.metadata.yaml.CleanupGradleCacheStep
 import com.juanalmeyda.metadata.yaml.GradleCachePackagesStep
 import com.juanalmeyda.metadata.yaml.PipelineMetadata
-import com.juanalmeyda.metadata.yaml.SetupDockerStep
 import com.juanalmeyda.metadata.yaml.SetupJvmStep
 
-class UserPipelineMetadataConfigTest : PipelineMetadataConfigTest {
+class TicTacPipelineMetadataConfigTest : PipelineMetadataConfigTest {
 
     override val config = PipelineMetadata(
-        name = "User",
-        pathPrefix = "user",
+        name = "Tic Tac Toe 4k",
+        pathPrefix = "tictactoe4k",
         pipelineSteps = listOf(
             CheckoutStep(),
             SetupJvmStep(),
-            SetupDockerStep(),
             GradleCachePackagesStep(),
-            CheckStep(projectName = "user"),
+            CheckStep(projectName = "tictactoe4k"),
             CleanupGradleCacheStep()
         )
     )

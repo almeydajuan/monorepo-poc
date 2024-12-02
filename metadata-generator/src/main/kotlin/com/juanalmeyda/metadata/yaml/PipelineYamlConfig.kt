@@ -1,5 +1,6 @@
 package com.juanalmeyda.metadata.yaml
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
@@ -56,11 +57,13 @@ data class CleanupGradleCacheStep(
 ) : PipelineStep("Cleanup Gradle Cache")
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class CheckUserStep(
+data class CheckStep(
     @JsonProperty("timeout-minutes")
     val timeoutMinutes: Int = 25,
-    val run: String = "./gradlew user:check"
-) : PipelineStep("Check User")
+    @JsonIgnore
+    val projectName: String,
+    val run: String = "./gradlew $projectName:check"
+) : PipelineStep("Check $projectName")
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class GradleCachePackagesStep(

@@ -32,7 +32,7 @@ jobs:
           path: "~/.gradle/caches:~/.gradle/wrapper"
           key: "${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}"
           restore-keys: "${{ runner.os }}-gradle"
-      - name: Check User
+      - name: Check user
         timeout-minutes: 25
         run: ./gradlew user:check
       - name: Cleanup Gradle Cache
