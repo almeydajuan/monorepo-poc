@@ -26,5 +26,4 @@ object PipelineYamlParser : ConfigurableJacksonYaml(
         .done()
 )
 
-// FIXME: find a better way to do this
-fun PipelineYamlParser.parse(input: Any) = this.asFormatString(input).replace("\"on\"", "on")
+fun PipelineYamlParser.parse(input: Any) = this.asFormatString(input)
