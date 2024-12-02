@@ -9,7 +9,7 @@ import com.juanalmeyda.metadata.yaml.YamlConfig
 class TicTacMetadataConfigTest : YamlMetadataConfigTest {
 
     override val config = YamlConfig(
-        serviceName = ServiceName.of("Tic Tac Service"),
+        serviceName = ServiceName.of("Tic Tac Toe 4k"),
         attributes = listOf(backend, frontend),
     )
 }
