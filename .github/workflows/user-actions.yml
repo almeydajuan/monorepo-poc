@@ -1,10 +1,12 @@
 name: User
+
 on:
   push:
     paths:
       - user/**
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
