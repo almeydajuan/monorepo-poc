@@ -11,7 +11,7 @@ import com.juanalmeyda.metadata.yaml.SetupJvmStep
 class TicTacPipelineMetadataConfigTest : PipelineMetadataConfigTest {
 
     override val config = PipelineMetadata(
-        name = "Tic Tac Toe 4k",
+        name = "TicTacToe 4k",
         pathPrefix = "tictactoe4k",
         pipelineSteps = listOf(
             CheckoutStep(),
