@@ -21,7 +21,7 @@ tasks {
     val refreshGeneratedPipeline by registering(Task::class) {
         group = "documentation"
 
-        val fileNamePattern = "user-actions"
+        val fileNamePattern = "generate pipeline metadata"
         val files = fileTree("$projectDir/src/test/resources").toList()
             .map { it.path }
             .filter { it.contains(fileNamePattern) }
@@ -38,7 +38,7 @@ tasks {
             }
         }
 
-        val outputFile = File("$rootDir/.github/workflows/user-actions.yml")
+        val outputFile = File("$rootDir/.github/workflows/${project.name}-actions.yml")
         doLast {
             if (files.isNotEmpty()) {
                 Files.copy(File(files.single()), outputFile)
