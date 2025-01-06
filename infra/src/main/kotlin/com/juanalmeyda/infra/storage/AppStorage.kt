@@ -2,9 +2,9 @@ package com.juanalmeyda.infra.storage
 
 import dev.forkhandles.result4k.Result4k
 import dev.forkhandles.result4k.peekFailure
-import org.http4k.cloudnative.health.Completed
-import org.http4k.cloudnative.health.ReadinessCheck
 import org.http4k.config.Environment
+import org.http4k.k8s.health.Completed
+import org.http4k.k8s.health.ReadinessCheck
 import org.jetbrains.exposed.sql.Database.Companion.connect
 import org.jetbrains.exposed.sql.transactions.transaction
 

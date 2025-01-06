@@ -4,9 +4,9 @@ import dev.forkhandles.result4k.get
 import dev.forkhandles.result4k.map
 import dev.forkhandles.result4k.mapFailure
 import dev.forkhandles.result4k.resultFrom
-import org.http4k.cloudnative.health.Completed
-import org.http4k.cloudnative.health.Failed
-import org.http4k.cloudnative.health.ReadinessCheck
+import org.http4k.k8s.health.Completed
+import org.http4k.k8s.health.Failed
+import org.http4k.k8s.health.ReadinessCheck
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 
 class DatabaseReadinessCheck(private val transactor: AppStorageTransactor) : ReadinessCheck {

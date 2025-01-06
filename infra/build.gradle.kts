@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api(Http4k.cloudnative)
+    api(Http4k.core)
 
     implementation(JetBrains.exposed.core)
 
