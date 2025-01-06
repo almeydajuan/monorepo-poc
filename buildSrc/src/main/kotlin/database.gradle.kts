@@ -24,6 +24,8 @@ tasks {
         useJUnitPlatform {
             includeTags(databaseTestTag)
         }
+        testClassesDirs = sourceSets.test.get().output.classesDirs
+        classpath = sourceSets.test.get().runtimeClasspath
     }
 
     check {
