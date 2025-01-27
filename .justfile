@@ -5,7 +5,7 @@ _targets:
 check project="":
     #!/usr/bin/env sh
     if [ -z `echo {{project}}` ]; then
-      ./gradlew :monorepoSummary
+      ./gradlew :monorepoOverview
       ./gradlew check
     else
       ./gradlew :{{project}}:check
