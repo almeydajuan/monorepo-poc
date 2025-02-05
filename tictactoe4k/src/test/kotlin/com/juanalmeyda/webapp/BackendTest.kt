@@ -1,5 +1,7 @@
 package com.juanalmeyda.webapp
 
+import com.juanalmeyda.infra.Proxy
+import com.juanalmeyda.tictactoe4k.FeatureFlagClient
 import com.juanalmeyda.tictactoe4k.Game
 import com.juanalmeyda.tictactoe4k.Move
 import com.juanalmeyda.tictactoe4k.Player.O
@@ -12,6 +14,7 @@ import org.http4k.core.Method.GET
 import org.http4k.core.Method.POST
 import org.http4k.core.Request
 import org.http4k.core.Response
+import org.http4k.core.Status
 import org.http4k.core.Status.Companion.OK
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -76,6 +79,18 @@ class BackendTest {
 
         val game = gameLens.extract(response)
         expectThat(game).isEqualTo(Game())
+    }
+
+    @Test
+    fun `assert that games with AI oponent are not ready`() {
+        val featureFlagClient = object : FeatureFlagClient by Proxy.proxy() {
+            override fun isAIOponentEnabled() = true
+        }
+        val backend = newBackend(Game(), featureFlagClient)
+
+        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
+
+        expectThat(response.status).isEqualTo(Status.SERVICE_UNAVAILABLE)
     }
 }
 

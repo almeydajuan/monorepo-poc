@@ -19,12 +19,17 @@ val gameLens = Body.auto<Game>().toLens()
 val xLens = Query.int().required("x")
 val yLens = Query.int().required("y")
 
-fun newBackend(initialGame: Game): HttpHandler {
+fun newBackend(initialGame: Game, featureFlagClient: FeatureFlagClient = InMemoryFeatureFlagClient()): HttpHandler {
     val game = AtomicReference(initialGame)
+    val featureFlag = featureFlagClient
 
     return routes(
         "/game" bind Method.GET to { _ ->
-            Response(Status.OK).with(gameLens of game.get())
+            if (featureFlag.isAIOponentEnabled()) {
+                Response(Status.SERVICE_UNAVAILABLE)
+            } else {
+                Response(Status.OK).with(gameLens of game.get())
+            }
         },
         "/game" bind Method.POST to { request ->
             val x = xLens(request)
