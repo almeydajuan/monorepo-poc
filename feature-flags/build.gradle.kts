@@ -10,7 +10,7 @@ dependencies {
 }
 
 application {
-    mainClass = "com.juanalmeyda.featureflags.ApplicationKt"
+    mainClass = "com.juanalmeyda.featureflags.MainKt"
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
