@@ -1,12 +1,12 @@
 plugins {
     id("backend")
-    id("io.ktor.plugin") version "3.0.3"
+    id("io.ktor.plugin")
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm:3.0.3")
-    implementation("io.ktor:ktor-server-netty:3.0.3")
-    implementation("ch.qos.logback:logback-classic:1.4.14")
+    implementation("io.ktor:ktor-server-core-jvm:_")
+    implementation(Ktor.server.netty)
+    implementation("ch.qos.logback:logback-classic:_")
 }
 
 application {
