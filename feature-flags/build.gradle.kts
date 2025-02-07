@@ -4,9 +4,15 @@ plugins {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm:_")
     implementation(Ktor.server.netty)
+    implementation("io.ktor:ktor-server-core-jvm:_")
+    implementation("io.ktor:ktor-server-content-negotiation:_")
+    implementation("io.ktor:ktor-client-content-negotiation:_")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:_")
     implementation("ch.qos.logback:logback-classic:_")
+
+    testImplementation("io.ktor:ktor-server-test-host:_")
+    testApi(Testing.strikt.core)
 }
 
 application {
