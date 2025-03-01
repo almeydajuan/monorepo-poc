@@ -42,12 +42,14 @@ class ApplicationTest {
     }
 
     @Test
-    fun `get ai opponent feature flag`() = testApplication {
-        val client = setupClient()
-        val response = client.get("/flag/$AI_OPPONENT")
+    fun `get ai opponent feature flag`() {
+        testApplication {
+            val client = setupClient()
+            val response = client.get("/flag/$AI_OPPONENT")
 
-        expectThat(response.status).isEqualTo(OK)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(FeatureFlag(name = AI_OPPONENT, enabled = false))
+            expectThat(response.status).isEqualTo(OK)
+            expectThat(response.body<FeatureFlag>()).isEqualTo(disabledAiOpponent)
+        }
     }
 
     @Test
@@ -55,11 +57,11 @@ class ApplicationTest {
         val client = setupClient()
         val response = client.post("/flag") {
             contentType(Json)
-            setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
+            setBody(enabledAiOpponent)
         }
 
         expectThat(response.status).isEqualTo(Created)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(FeatureFlag(name = AI_OPPONENT, enabled = true))
+        expectThat(response.body<FeatureFlag>()).isEqualTo(enabledAiOpponent)
     }
 
     @Test
@@ -67,13 +69,16 @@ class ApplicationTest {
         val client = setupClient()
         client.post("/flag") {
             contentType(type = Json)
-            setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
+            setBody(enabledAiOpponent)
         }
 
         val response = client.get("/flag/$AI_OPPONENT")
 
         expectThat(response.status).isEqualTo(OK)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(FeatureFlag(name = AI_OPPONENT, enabled = true))
+        expectThat(response.body<FeatureFlag>()).isEqualTo(enabledAiOpponent)
     }
 
 }
+
+val enabledAiOpponent = FeatureFlag(name = AI_OPPONENT, enabled = true)
+val disabledAiOpponent = FeatureFlag(name = AI_OPPONENT, enabled = false)
