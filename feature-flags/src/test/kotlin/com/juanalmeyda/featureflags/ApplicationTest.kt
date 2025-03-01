@@ -7,7 +7,8 @@ import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.ContentType
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.contentType
 import io.ktor.serialization.jackson.jackson
@@ -56,11 +57,11 @@ class ApplicationTest {
             }
         }
         val response = client.post("/flag") {
-            contentType(ContentType.Application.Json)
+            contentType(Json)
             setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
         }
 
-        expectThat(response.status).isEqualTo(OK)
+        expectThat(response.status).isEqualTo(Created)
         expectThat(response.body<FeatureFlag>()).isEqualTo(FeatureFlag(name = AI_OPPONENT, enabled = true))
     }
 
@@ -75,7 +76,7 @@ class ApplicationTest {
             }
         }
         client.post("/flag") {
-            contentType(ContentType.Application.Json)
+            contentType(type = Json)
             setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
         }
 

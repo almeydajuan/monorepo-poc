@@ -1,5 +1,6 @@
 package com.juanalmeyda.featureflags
 
+import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -34,7 +35,7 @@ fun Application.module() {
         post("/flag") {
             call.receive<FeatureFlag>().apply {
                 repository.updateFeatureFlag(name, enabled)
-                call.respond(repository.getFeatureFlag(name))
+                call.respond(status = Created, message = repository.getFeatureFlag(name))
             }
         }
     }
@@ -43,7 +44,10 @@ fun Application.module() {
 class FeatureFlagRepository {
     private val flags = mutableMapOf<String, Boolean>()
 
-    fun getFeatureFlag(id: String): FeatureFlag = flags[id]?.let { FeatureFlag(id, it) } ?: FeatureFlag(id, false)
+    fun getFeatureFlag(id: String): FeatureFlag =
+        flags[id]
+            ?.let { FeatureFlag(id, it) }
+            ?: FeatureFlag(id, false)
 
     fun updateFeatureFlag(id: String, enabled: Boolean) = flags.put(id, enabled)
 }
