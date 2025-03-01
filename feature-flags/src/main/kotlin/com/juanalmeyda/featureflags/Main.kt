@@ -1,6 +1,7 @@
 package com.juanalmeyda.featureflags
 
-import io.ktor.serialization.kotlinx.json.json
+import com.juanalmeyda.featureflags.FeatureFlag.Companion.AI_OPPONENT
+import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
@@ -17,15 +18,22 @@ fun main() {
 
 fun Application.module() {
     install(ContentNegotiation) {
-        json()
+        jackson()
     }
     routing {
         get("/") {
             call.respondText("Hello World!")
         }
         // TODO: allow to enable/disable
+        // TODO: replace with /flag/{id}
         get("/flag/aioponent") {
-            call.respond(false)
+            call.respond(AI_OPPONENT)
         }
+    }
+}
+
+data class FeatureFlag(val name: String, val enabled: Boolean) {
+    companion object {
+        val AI_OPPONENT = FeatureFlag(name = "aioponent", enabled = false)
     }
 }

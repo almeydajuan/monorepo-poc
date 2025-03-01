@@ -8,7 +8,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm:_")
     implementation("io.ktor:ktor-server-content-negotiation:_")
     implementation("io.ktor:ktor-client-content-negotiation:_")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:_")
+    implementation("io.ktor:ktor-serialization-jackson:_")
     implementation("ch.qos.logback:logback-classic:_")
 
     testImplementation("io.ktor:ktor-server-test-host:_")

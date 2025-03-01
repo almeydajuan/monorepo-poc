@@ -1,11 +1,12 @@
 package com.juanalmeyda.featureflags
 
+import com.juanalmeyda.featureflags.FeatureFlag.Companion.AI_OPPONENT
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.serialization.jackson.jackson
 import io.ktor.server.testing.testApplication
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
@@ -31,12 +32,12 @@ class ApplicationTest {
         }
         val client = createClient {
             install(ContentNegotiation) {
-                json()
+                jackson()
             }
         }
         val response = client.get("/flag/aioponent")
 
         expectThat(response.status).isEqualTo(OK)
-        expectThat(response.body<Boolean>()).isEqualTo(false)
+        expectThat(response.body<FeatureFlag>()).isEqualTo(AI_OPPONENT)
     }
 }
