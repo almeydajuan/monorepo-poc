@@ -1,6 +1,7 @@
 package com.juanalmeyda.featureflags
 
 import com.juanalmeyda.featureflags.FeatureFlag.Companion.AI_OPPONENT
+import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
@@ -12,6 +13,7 @@ import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.contentType
 import io.ktor.serialization.jackson.jackson
+import io.ktor.server.testing.ApplicationTestBuilder
 import io.ktor.server.testing.testApplication
 import org.junit.jupiter.api.Test
 import strikt.api.expectThat
@@ -19,11 +21,20 @@ import strikt.assertions.isEqualTo
 
 class ApplicationTest {
 
-    @Test
-    fun `test root`() = testApplication {
+    private fun ApplicationTestBuilder.setupClient(): HttpClient {
         application {
             module()
         }
+        return createClient {
+            install(ContentNegotiation) {
+                jackson()
+            }
+        }
+    }
+
+    @Test
+    fun `test root`() = testApplication {
+        val client = setupClient()
         val response = client.get("/")
 
         expectThat(response.status).isEqualTo(OK)
@@ -32,14 +43,7 @@ class ApplicationTest {
 
     @Test
     fun `get ai opponent feature flag`() = testApplication {
-        application {
-            module()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                jackson()
-            }
-        }
+        val client = setupClient()
         val response = client.get("/flag/$AI_OPPONENT")
 
         expectThat(response.status).isEqualTo(OK)
@@ -48,14 +52,7 @@ class ApplicationTest {
 
     @Test
     fun `enable feature flag`() = testApplication {
-        application {
-            module()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                jackson()
-            }
-        }
+        val client = setupClient()
         val response = client.post("/flag") {
             contentType(Json)
             setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
@@ -67,14 +64,7 @@ class ApplicationTest {
 
     @Test
     fun `enable and retrieve feature flag`() = testApplication {
-        application {
-            module()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                jackson()
-            }
-        }
+        val client = setupClient()
         client.post("/flag") {
             contentType(type = Json)
             setBody(FeatureFlag(name = AI_OPPONENT, enabled = true))
