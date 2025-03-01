@@ -35,9 +35,9 @@ class ApplicationTest {
                 jackson()
             }
         }
-        val response = client.get("/flag/aioponent")
+        val response = client.get("/flag/$AI_OPPONENT")
 
         expectThat(response.status).isEqualTo(OK)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(AI_OPPONENT)
+        expectThat(response.body<FeatureFlag>()).isEqualTo(FeatureFlag(name = AI_OPPONENT, enabled = false))
     }
 }

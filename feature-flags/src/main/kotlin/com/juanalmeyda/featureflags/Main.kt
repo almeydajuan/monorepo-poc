@@ -1,6 +1,5 @@
 package com.juanalmeyda.featureflags
 
-import com.juanalmeyda.featureflags.FeatureFlag.Companion.AI_OPPONENT
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -25,15 +24,15 @@ fun Application.module() {
             call.respondText("Hello World!")
         }
         // TODO: allow to enable/disable
-        // TODO: replace with /flag/{id}
-        get("/flag/aioponent") {
-            call.respond(AI_OPPONENT)
+        get("/flag/{id}") {
+            val id = call.parameters["id"].orEmpty()
+            call.respond(FeatureFlag(name = id, enabled = false))
         }
     }
 }
 
 data class FeatureFlag(val name: String, val enabled: Boolean) {
     companion object {
-        val AI_OPPONENT = FeatureFlag(name = "aioponent", enabled = false)
+        const val AI_OPPONENT = "aioponent"
     }
 }
