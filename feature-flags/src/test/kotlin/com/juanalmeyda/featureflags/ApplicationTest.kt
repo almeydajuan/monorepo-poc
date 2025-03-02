@@ -7,8 +7,10 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.contentType
@@ -32,6 +34,7 @@ class ApplicationTest {
         }
     }
 
+
     @Test
     fun `test root`() = testApplication {
         val client = setupClient()
@@ -41,14 +44,23 @@ class ApplicationTest {
         expectThat(response.bodyAsText()).isEqualTo("Hello World!")
     }
 
+    private suspend fun HttpResponse.validate(
+        responseCode: HttpStatusCode = OK,
+        flag: FeatureFlag = disabledAiOpponent
+    ) {
+        this.apply {
+            expectThat(status).isEqualTo(responseCode)
+            expectThat(body<FeatureFlag>()).isEqualTo(flag)
+        }
+    }
+
     @Test
     fun `get ai opponent feature flag`() {
         testApplication {
             val client = setupClient()
             val response = client.get("/flag/$AI_OPPONENT")
 
-            expectThat(response.status).isEqualTo(OK)
-            expectThat(response.body<FeatureFlag>()).isEqualTo(disabledAiOpponent)
+            response.validate()
         }
     }
 
@@ -60,8 +72,7 @@ class ApplicationTest {
             setBody(enabledAiOpponent)
         }
 
-        expectThat(response.status).isEqualTo(Created)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(enabledAiOpponent)
+        response.validate(Created, enabledAiOpponent)
     }
 
     @Test
@@ -74,11 +85,10 @@ class ApplicationTest {
 
         val response = client.get("/flag/$AI_OPPONENT")
 
-        expectThat(response.status).isEqualTo(OK)
-        expectThat(response.body<FeatureFlag>()).isEqualTo(enabledAiOpponent)
+        response.validate(flag = enabledAiOpponent)
     }
 
 }
 
 val enabledAiOpponent = FeatureFlag(name = AI_OPPONENT, enabled = true)
-val disabledAiOpponent = FeatureFlag(name = AI_OPPONENT, enabled = false)
+val disabledAiOpponent = enabledAiOpponent.copy(enabled = false)
