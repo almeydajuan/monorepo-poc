@@ -27,7 +27,6 @@ fun Application.module() {
         get("/") {
             call.respondText("Hello World!")
         }
-        // TODO: allow to enable/disable
         get("/flag/{id}") {
             val id = call.parameters["id"].orEmpty()
             call.respond(repository.getFeatureFlag(id))
