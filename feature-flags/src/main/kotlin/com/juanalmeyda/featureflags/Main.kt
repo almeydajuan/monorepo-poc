@@ -1,5 +1,6 @@
 package com.juanalmeyda.featureflags
 
+import com.juanalmeyda.infra.FF_PORT
 import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.Application
@@ -15,7 +16,7 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 
 fun main() {
-    embeddedServer(Netty, port = 6789, module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = FF_PORT, module = Application::module).start(wait = true)
 }
 
 fun Application.module() {
