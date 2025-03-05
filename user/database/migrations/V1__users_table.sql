@@ -1,4 +1,4 @@
-# TODO: this is yet not used
+# TODO: automatise imports of migrations
 CREATE TABLE user_schema.users
 (
     id   UUID PRIMARY KEY,
