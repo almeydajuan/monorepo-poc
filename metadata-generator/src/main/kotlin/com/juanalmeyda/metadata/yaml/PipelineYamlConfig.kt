@@ -67,7 +67,7 @@ data class CheckStep(
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class GradleCachePackagesStep(
-    val uses: String = "actions/cache@v4.0.2",
+    val uses: String = "actions/cache@v4.2.0",
     val with: Map<String, Any> = mapOf(
         "path" to "~/.gradle/caches:~/.gradle/wrapper",
         "key" to "\${{ runner.os }}-gradle-\${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}",
