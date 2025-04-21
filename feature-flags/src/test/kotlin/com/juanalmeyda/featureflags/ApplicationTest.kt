@@ -1,6 +1,7 @@
 package com.juanalmeyda.featureflags
 
 import com.juanalmeyda.featureflags.FeatureFlag.Companion.AI_OPPONENT
+import com.juanalmeyda.featureflags.repository.InMemoryFeatureFlagRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -25,7 +26,7 @@ class ApplicationTest {
 
     private fun ApplicationTestBuilder.setupClient(): HttpClient {
         application {
-            module()
+            module(InMemoryFeatureFlagRepository())
         }
         return createClient {
             install(ContentNegotiation) {

@@ -1,5 +1,7 @@
 package com.juanalmeyda.featureflags
 
+import com.juanalmeyda.featureflags.repository.FeatureFlagRepository
+import com.juanalmeyda.featureflags.repository.InMemoryFeatureFlagRepository
 import com.juanalmeyda.infra.FF_PORT
 import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.serialization.jackson.jackson
@@ -19,8 +21,8 @@ fun main() {
     embeddedServer(Netty, port = FF_PORT, module = Application::module).start(wait = true)
 }
 
-fun Application.module() {
-    val repository = FeatureFlagRepository()
+fun Application.module(repository: FeatureFlagRepository = InMemoryFeatureFlagRepository()) {
+
     install(ContentNegotiation) {
         jackson()
     }
@@ -39,17 +41,6 @@ fun Application.module() {
             }
         }
     }
-}
-
-class FeatureFlagRepository {
-    private val flags = mutableMapOf<String, Boolean>()
-
-    fun getFeatureFlag(id: String): FeatureFlag =
-        flags[id]
-            ?.let { FeatureFlag(id, it) }
-            ?: FeatureFlag(id, false)
-
-    fun updateFeatureFlag(id: String, enabled: Boolean) = flags.put(id, enabled)
 }
 
 data class FeatureFlag(val name: String, val enabled: Boolean) {
