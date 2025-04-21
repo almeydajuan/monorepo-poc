@@ -2,5 +2,5 @@ package com.juanalmeyda.infra
 
 import org.junit.jupiter.api.Tag
 
-@Tag("withDatabase")
-annotation class WithDatabase
+@Tag("composed-test-tag")
+annotation class Composed

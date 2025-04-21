@@ -14,7 +14,7 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform {
-            excludeTags(databaseTestTag)
+            excludeTags(composedTestTag)
         }
     }
 
@@ -22,7 +22,7 @@ tasks {
         group = VERIFICATION_GROUP
         description = "Tests with database"
         useJUnitPlatform {
-            includeTags(databaseTestTag)
+            includeTags(composedTestTag)
         }
         testClassesDirs = sourceSets.test.get().output.classesDirs
         classpath = sourceSets.test.get().runtimeClasspath

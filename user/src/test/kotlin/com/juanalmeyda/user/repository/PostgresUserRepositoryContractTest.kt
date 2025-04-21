@@ -1,8 +1,8 @@
 package com.juanalmeyda.user.repository
 
-import com.juanalmeyda.infra.WithDatabase
+import com.juanalmeyda.infra.Composed
 
-@WithDatabase
+@Composed
 class PostgresUserRepositoryContractTest : UserRepositoryContractTest {
     override val userAppStorage: UserAppStorage = DatabaseUserAppStorage()
 }

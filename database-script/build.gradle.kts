@@ -1,6 +1,6 @@
 plugins {
     id("testingProject")
-    id("database")
+    id("composed")
     id("testFixtures")
 }
 

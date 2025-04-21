@@ -18,7 +18,7 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform {
-            excludeTags(databaseTestTag)
+            excludeTags(composedTestTag)
         }
     }
 }

@@ -1,7 +1,7 @@
 plugins {
     id("backend")
     id("io.ktor.plugin")
-    id("database")
+    id("composed")
 }
 
 dependencies {

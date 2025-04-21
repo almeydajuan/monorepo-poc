@@ -1,6 +1,6 @@
 plugins {
     id("backend")
-    id("database")
+    id("composed")
 }
 
 dependencies {

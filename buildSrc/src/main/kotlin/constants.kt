@@ -1,1 +1,1 @@
-const val databaseTestTag = "withDatabase"
+const val composedTestTag = "composed-test-tag"
