@@ -7,14 +7,14 @@ plugins {
 dependencies {
     implementation(Ktor.server.netty)
     implementation("io.ktor:ktor-server-core-jvm:_")
-    implementation("io.ktor:ktor-server-content-negotiation:_")
-    implementation("io.ktor:ktor-client-content-negotiation:_")
-    implementation("io.ktor:ktor-serialization-jackson:_")
+    implementation(Ktor.server.contentNegotiation)
+    implementation(Ktor.client.contentNegotiation)
+    implementation(Ktor.plugins.serialization.jackson)
     implementation("ch.qos.logback:logback-classic:_")
 
-    implementation("redis.clients:jedis:5.2.0")
+    implementation("redis.clients:jedis:_")
 
-    testImplementation("io.ktor:ktor-server-test-host:_")
+    testImplementation(Ktor.server.testHost)
     testApi(Testing.strikt.core)
 }
 
