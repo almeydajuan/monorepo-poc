@@ -1,6 +1,7 @@
 plugins {
     id("backend")
     id("io.ktor.plugin")
+    id("database")
 }
 
 dependencies {
@@ -10,6 +11,8 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:_")
     implementation("io.ktor:ktor-serialization-jackson:_")
     implementation("ch.qos.logback:logback-classic:_")
+
+    implementation("redis.clients:jedis:5.2.0")
 
     testImplementation("io.ktor:ktor-server-test-host:_")
     testApi(Testing.strikt.core)
