@@ -6,8 +6,8 @@ group = "com.juanalmeyda"
 version = "1.0-SNAPSHOT"
 
 tasks.wrapper {
-    gradleVersion = "8.12"
-    distributionSha256Sum = "7ebdac923867a3cec0098302416d1e3c6c0c729fc4e2e05c10637a8af33a76c5"
+    gradleVersion = "8.13"
+    distributionSha256Sum = "fba8464465835e74f7270bbf43d6d8a8d7709ab0a43ce1aa3323f73e9aa0c612"
     distributionType = Wrapper.DistributionType.ALL
 }
 
