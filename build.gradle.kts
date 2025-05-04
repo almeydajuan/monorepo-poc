@@ -2,7 +2,7 @@ plugins {
     id("org.barfuin.gradle.taskinfo")
 }
 
-group = "com.juanalmeyda"
+group = "com.juan"
 version = "1.0-SNAPSHOT"
 
 tasks.wrapper {

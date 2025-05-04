@@ -1,7 +1,7 @@
 import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 
 plugins {
-    kotlin("jvm")
+    id("kotlin")
 }
 
 tasks {
