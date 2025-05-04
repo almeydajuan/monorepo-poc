@@ -17,6 +17,7 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ../../../database/migrations/V1__users_table.sql:/docker-entrypoint-initdb.d/V1__users_table.sql
+# TODO: use flyway properly for the migrations
     healthcheck:
       test: pg_isready -U juan -d user_db
       start_period: 0s
