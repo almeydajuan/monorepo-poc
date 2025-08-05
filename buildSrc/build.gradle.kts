@@ -8,8 +8,8 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:_")
-    implementation("com.google.guava:guava:_")
+    implementation(libs.guava)
 
-    api("com.avast.gradle:gradle-docker-compose-plugin:_")
+    api(libs.gradle.docker.compose)
 }
 

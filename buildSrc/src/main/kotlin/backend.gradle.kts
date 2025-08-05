@@ -14,7 +14,7 @@ plugins {
 dependencies {
     api(project(":infra"))
 
-    implementation(Http4k.server.jetty)
+    implementation(libs.http4k.server.jetty)
 
     testFixturesApi(testFixtures(project(":infra")))
 }

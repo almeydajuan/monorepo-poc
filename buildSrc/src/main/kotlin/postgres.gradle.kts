@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(JetBrains.exposed.core)
-    implementation(JetBrains.exposed.jdbc)
-    implementation("org.postgresql:postgresql:_")
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.postgresql)
 }
