@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:_")
+    implementation(libs.kotlin.jvm.gradle.plugin)
     implementation(libs.guava)
 
     api(libs.gradle.docker.compose)

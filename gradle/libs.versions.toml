@@ -22,7 +22,7 @@ result4k = "2.22.4.0"
 values4k = "2.22.4.0"
 exposed = "0.61.0"
 postgresql = "42.7.7"
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 jedis = "6.1.0"
 strikt = "0.35.1"
 junit-jupiter = "5.13.4"
@@ -69,6 +69,9 @@ ktor-plugin = "3.2.3"
 taskinfo = "2.2.0"
 
 [libraries]
+
+# Kotlin
+kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin"}
 
 # Logging
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
