@@ -48,6 +48,12 @@ logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "lo
 
 # Ktor
 ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
 # Docker
 gradle-docker-compose = { module = "com.avast.gradle:gradle-docker-compose-plugin", version.ref = "gradle-docker-compose" }
@@ -77,3 +83,8 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", vers
 http4k-bom = { module = "org.http4k:http4k-bom", version.ref = "http4k" }
 http4k-cloudnative = { module = "org.http4k:http4k-cloudnative", version.ref = "http4k" }
 http4k-core = { module = "org.http4k:http4k-core", version.ref = "http4k" }
+http4k-format-jackson = { module = "org.http4k:http4k-format-jackson", version.ref = "http4k" }
+http4k-format-jackson-yaml = { module = "org.http4k:http4k-format-jackson-yaml", version.ref = "http4k" }
+http4k-testing-approval = { module = "org.http4k:http4k-testing-approval", version.ref = "http4k" }
+http4k-client-okhttp = { module = "org.http4k:http4k-client-okhttp", version.ref = "http4k" }
+http4k-template-handlebars = { module = "org.http4k:http4k-template-handlebars", version.ref = "http4k" }

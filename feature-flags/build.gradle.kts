@@ -6,16 +6,16 @@ plugins {
 
 dependencies {
     implementation(platform(libs.ktor.bom))
-    implementation("io.ktor:ktor-server-netty")
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-content-negotiation")
-    implementation("io.ktor:ktor-client-content-negotiation")
-    implementation("io.ktor:ktor-serialization-jackson")
+    implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.server.core.jvm)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.jackson)
     implementation(libs.logback.classic)
 
     implementation(libs.jedis)
 
-    testImplementation("io.ktor:ktor-server-test-host")
+    testImplementation(libs.ktor.server.test.host)
     testApi(libs.strikt.core)
 }
 

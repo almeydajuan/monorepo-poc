@@ -5,8 +5,8 @@ plugins {
 
 dependencies {
     implementation(platform(libs.http4k.bom))
-    implementation("org.http4k:http4k-core")
-    implementation("org.http4k:http4k-format-jackson")
+    implementation(libs.http4k.core)
+    implementation(libs.http4k.format.jackson)
 
     testApi(libs.strikt.core)
 }

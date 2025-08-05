@@ -5,7 +5,7 @@ plugins {
 
 dependencies {
     testImplementation(platform(libs.http4k.bom))
-    testImplementation("org.http4k:http4k-core")
-    testImplementation("org.http4k:http4k-format-jackson")
-    testImplementation("org.http4k:http4k-testing-approval")
+    testImplementation(libs.http4k.core)
+    testImplementation(libs.http4k.format.jackson)
+    testImplementation(libs.http4k.testing.approval)
 }
