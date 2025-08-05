@@ -1,5 +1,4 @@
 import de.fayard.refreshVersions.core.FeatureFlag.GRADLE_UPDATES
-import de.fayard.refreshVersions.core.FeatureFlag.VERSIONS_CATALOG
 
 rootProject.name = "monorepo-poc"
 
@@ -8,10 +7,15 @@ plugins {
     id("de.fayard.refreshVersions") version "0.60.5"
 }
 
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs")
+    }
+}
+
 refreshVersions {
     featureFlags {
         disable(GRADLE_UPDATES)
-        disable(VERSIONS_CATALOG)
     }
     rejectVersionIf {
         @Suppress("UnstableApiUsage")

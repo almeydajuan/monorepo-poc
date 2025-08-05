@@ -4,10 +4,11 @@ plugins {
 }
 
 dependencies {
-    implementation(Http4k.core)
-    implementation(Http4k.format.jackson)
+    implementation(platform(libs.http4k.bom))
+    implementation("org.http4k:http4k-core")
+    implementation("org.http4k:http4k-format-jackson")
 
-    testApi(Testing.strikt.core)
+    testApi(libs.strikt.core)
 }
 
 application {

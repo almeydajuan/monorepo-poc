@@ -1,21 +1,22 @@
 plugins {
     id("backend")
-    id("io.ktor.plugin")
+    alias(libs.plugins.ktor)
     id("composed")
 }
 
 dependencies {
-    implementation(Ktor.server.netty)
-    implementation("io.ktor:ktor-server-core-jvm:_")
-    implementation(Ktor.server.contentNegotiation)
-    implementation(Ktor.client.contentNegotiation)
-    implementation(Ktor.plugins.serialization.jackson)
-    implementation("ch.qos.logback:logback-classic:_")
+    implementation(platform(libs.ktor.bom))
+    implementation("io.ktor:ktor-server-netty")
+    implementation("io.ktor:ktor-server-core-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation("io.ktor:ktor-client-content-negotiation")
+    implementation("io.ktor:ktor-serialization-jackson")
+    implementation(libs.logback.classic)
 
-    implementation("redis.clients:jedis:_")
+    implementation(libs.jedis)
 
-    testImplementation(Ktor.server.testHost)
-    testApi(Testing.strikt.core)
+    testImplementation("io.ktor:ktor-server-test-host")
+    testApi(libs.strikt.core)
 }
 
 application {

@@ -5,6 +5,6 @@ plugins {
 }
 
 dependencies {
-    testImplementation(Testing.strikt.core)
+    testImplementation(libs.strikt.core)
     testFixturesApi(testFixtures(projects.infra))
 }

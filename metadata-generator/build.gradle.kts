@@ -5,8 +5,9 @@ plugins {
 }
 
 dependencies {
-    implementation(Http4k.format.jacksonYaml)
+    implementation(platform(libs.http4k.bom))
+    implementation("org.http4k:http4k-format-jackson-yaml")
 
-    testImplementation(Http4k.format.jacksonYaml)
-    testImplementation(Http4k.testing.approval)
+    testImplementation("org.http4k:http4k-format-jackson-yaml")
+    testImplementation("org.http4k:http4k-testing-approval")
 }

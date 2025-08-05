@@ -4,10 +4,16 @@ plugins {
 }
 
 dependencies {
-    api(Http4k.cloudnative)
-    api(Http4k.core)
+    // Using version catalog for BOM
+    implementation(platform(libs.http4k.bom))
 
-    implementation(JetBrains.exposed.core)
+    // Using version catalog for http4k modules
+    api(libs.http4k.cloudnative)
+    api(libs.http4k.core)
 
-    testApi(Testing.strikt.core)
+    // Using version catalog for exposed
+    implementation(libs.bundles.exposed)
+
+    // Using version catalog for testing
+    testApi(libs.strikt.core)
 }

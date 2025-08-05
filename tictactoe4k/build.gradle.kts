@@ -3,14 +3,15 @@ plugins {
 }
 
 dependencies {
-    implementation(Http4k.core)
-    implementation(Http4k.client.okhttp)
-    implementation(Http4k.format.jackson)
-    implementation(Http4k.template.handlebars)
+    implementation(platform(libs.http4k.bom))
+    implementation("org.http4k:http4k-core")
+    implementation("org.http4k:http4k-client-okhttp")
+    implementation("org.http4k:http4k-format-jackson")
+    implementation("org.http4k:http4k-template-handlebars")
 
-    testApi(Testing.strikt.core)
-    testImplementation(Http4k.testing.approval)
-    testImplementation(Http4k.format.jacksonYaml)
+    testApi(libs.strikt.core)
+    testImplementation("org.http4k:http4k-testing-approval")
+    testImplementation("org.http4k:http4k-format-jackson-yaml")
 }
 
 application {

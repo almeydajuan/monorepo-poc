@@ -1,5 +1,5 @@
 plugins {
-    id("org.barfuin.gradle.taskinfo")
+    alias(libs.plugins.taskinfo)
 }
 
 group = "com.juan"
