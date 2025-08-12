@@ -21,11 +21,10 @@ val yLens = Query.int().required("y")
 
 fun newBackend(initialGame: Game, featureFlagClient: FeatureFlagClient = InMemoryFeatureFlagClient()): HttpHandler {
     val game = AtomicReference(initialGame)
-    val featureFlag = featureFlagClient
 
     return routes(
         "/game" bind Method.GET to { _ ->
-            if (featureFlag.isAIOponentEnabled()) {
+            if (featureFlagClient.isAIOponentEnabled()) {
                 Response(Status.SERVICE_UNAVAILABLE)
             } else {
                 Response(Status.OK).with(gameLens of game.get())
