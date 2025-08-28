@@ -24,7 +24,7 @@ values4k = "2.22.4.0"
 exposed = "0.61.0"
 postgresql = "42.7.7"
 kotlin = "2.2.10"
-jedis = "6.1.0"
+jedis = "6.2.0"
 strikt = "0.35.1"
 junit-jupiter = "5.13.4"
 http4k = "6.15.1.0"
@@ -58,7 +58,6 @@ exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "e
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
 jedis = { module = "redis.clients:jedis", version.ref = "jedis" }
-##                       ⬆ :6.2.0"
 
 strikt-core = { module = "io.strikt:strikt-core", version.ref = "strikt" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
