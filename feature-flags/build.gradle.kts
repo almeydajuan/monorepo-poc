@@ -1,6 +1,6 @@
 plugins {
+    alias(libs.plugins.io.ktor.plugin)
     id("backend")
-    alias(libs.plugins.ktor)
     id("composed")
 }
 

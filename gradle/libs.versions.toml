@@ -7,12 +7,16 @@ junit = ["junit-jupiter-api", "junit-jupiter-engine"]
 
 [plugins]
 
-ktor = { id = "io.ktor.plugin", version.ref = "ktor-plugin" }
 taskinfo = { id = "org.barfuin.gradle.taskinfo", version.ref = "taskinfo" }
+
+org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version = "2.2.0" }
+
+io-ktor-plugin = { id = "io.ktor.plugin", version = "3.2.3" }
+
+org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "5.2.0" }
 
 [versions]
 
-# Library versions
 logback = "1.5.18"
 ktor = "3.2.3"
 gradle-docker-compose = "0.17.12"
@@ -23,65 +27,60 @@ values4k = "2.22.4.0"
 exposed = "0.61.0"
 postgresql = "42.7.7"
 kotlin = "2.2.0"
+##  ⬆ = "2.2.10"
 jedis = "6.1.0"
 strikt = "0.35.1"
 junit-jupiter = "5.13.4"
 http4k = "6.15.1.0"
 
-# Plugin versions
 ktor-plugin = "3.2.3"
 taskinfo = "2.2.0"
 
 [libraries]
 
-# Kotlin
-kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin"}
+kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 
-# Logging
-logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
-# Ktor
-ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
-ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-core-jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
-# Docker
 gradle-docker-compose = { module = "com.avast.gradle:gradle-docker-compose-plugin", version.ref = "gradle-docker-compose" }
 
-# Google
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 
-# Forkhandles
-forkhandles-bom = { module = "dev.forkhandles:forkhandles-bom", version.ref = "forkhandles-bom" }
-result4k = { module = "dev.forkhandles:result4k", version.ref = "result4k" }
-values4k = { module = "dev.forkhandles:values4k", version.ref = "values4k" }
+forkhandles-bom = { group = "dev.forkhandles", name = "forkhandles-bom", version.ref = "forkhandles-bom" }
+result4k = { group = "dev.forkhandles", name = "result4k", version.ref = "result4k" }
+values4k = { group = "dev.forkhandles", name = "values4k", version.ref = "values4k" }
 
-# Database
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
-# Redis
 jedis = { module = "redis.clients:jedis", version.ref = "jedis" }
+##                       ⬆ :6.2.0"
 
-# Testing
 strikt-core = { module = "io.strikt:strikt-core", version.ref = "strikt" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
 
-# HTTP4K
 http4k-bom = { module = "org.http4k:http4k-bom", version.ref = "http4k" }
 http4k-core = { module = "org.http4k:http4k-core", version.ref = "http4k" }
-http4k-config = { module = "org.http4k:http4k-config", version.ref = "http4k" }
+http4k-config = { group = "org.http4k", name = "http4k-config", version.ref = "http4k" }
 http4k-platform-core = { module = "org.http4k:http4k-platform-core", version.ref = "http4k" }
-http4k-platform-k8s = { module = "org.http4k:http4k-platform-k8s", version.ref = "http4k" }
+http4k-platform-k8s = { group = "org.http4k", name = "http4k-platform-k8s", version.ref = "http4k" }
 http4k-format-jackson = { module = "org.http4k:http4k-format-jackson", version.ref = "http4k" }
 http4k-format-jackson-yaml = { module = "org.http4k:http4k-format-jackson-yaml", version.ref = "http4k" }
 http4k-testing-approval = { module = "org.http4k:http4k-testing-approval", version.ref = "http4k" }
 http4k-client-okhttp = { module = "org.http4k:http4k-client-okhttp", version.ref = "http4k" }
 http4k-template-handlebars = { module = "org.http4k:http4k-template-handlebars", version.ref = "http4k" }
 http4k-server-jetty = { module = "org.http4k:http4k-server-jetty", version.ref = "http4k" }
+
+kotlin-build-tools-impl = { module = "org.jetbrains.kotlin:kotlin-build-tools-impl" }
+
+kotlin-scripting-compiler-embeddable = { group = "org.jetbrains.kotlin", name = "kotlin-scripting-compiler-embeddable", version.ref = "kotlin" }
