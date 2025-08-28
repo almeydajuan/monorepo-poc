@@ -7,11 +7,9 @@ junit = ["junit-jupiter-api", "junit-jupiter-engine"]
 
 [plugins]
 
-taskinfo = { id = "org.barfuin.gradle.taskinfo", version.ref = "taskinfo" }
+org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version.ref = "taskinfo" }
 
-org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version = "2.2.0" }
-
-io-ktor-plugin = { id = "io.ktor.plugin", version = "3.2.3" }
+io-ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor-plugin" }
 
 org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "5.2.0" }
 
@@ -26,8 +24,7 @@ result4k = "2.22.4.0"
 values4k = "2.22.4.0"
 exposed = "0.61.0"
 postgresql = "42.7.7"
-kotlin = "2.2.0"
-##  ⬆ = "2.2.10"
+kotlin = "2.2.10"
 jedis = "6.1.0"
 strikt = "0.35.1"
 junit-jupiter = "5.13.4"
