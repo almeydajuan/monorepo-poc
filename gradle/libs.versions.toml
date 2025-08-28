@@ -3,7 +3,6 @@
 [bundles]
 
 exposed = ["exposed-core", "exposed-jdbc"]
-junit = ["junit-jupiter-api", "junit-jupiter-engine"]
 
 [plugins]
 
