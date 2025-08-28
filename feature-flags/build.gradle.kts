@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-    implementation(platform(libs.ktor.bom))
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.server.content.negotiation)

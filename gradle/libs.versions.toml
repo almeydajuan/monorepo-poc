@@ -39,7 +39,6 @@ kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.ko
 
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
-ktor-bom = { group = "io.ktor", name = "ktor-bom", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor-server-core-jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
