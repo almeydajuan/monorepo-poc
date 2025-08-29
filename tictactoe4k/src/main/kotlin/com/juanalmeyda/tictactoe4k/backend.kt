@@ -1,6 +1,10 @@
 package com.juanalmeyda.tictactoe4k
 
-import org.http4k.core.Body
+import com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
+import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES
+import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES
+import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method
 import org.http4k.core.Method.DELETE
@@ -8,14 +12,29 @@ import org.http4k.core.Response
 import org.http4k.core.Status
 import org.http4k.core.with
 import org.http4k.filter.ServerFilters
-import org.http4k.format.Jackson.auto
+import org.http4k.format.ConfigurableJackson
+import org.http4k.format.asConfigurable
+import org.http4k.format.withStandardMappings
 import org.http4k.lens.Query
 import org.http4k.lens.int
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import java.util.concurrent.atomic.AtomicReference
 
-val gameLens = Body.auto<Game>().toLens()
+val Json = ConfigurableJackson(
+    KotlinModule.Builder()
+        .build()
+        .asConfigurable()
+        .withStandardMappings()
+        .done()
+        .deactivateDefaultTyping()
+        .setSerializationInclusion(NON_NULL)
+        .configure(FAIL_ON_NULL_FOR_PRIMITIVES, true)
+        .configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
+        .configure(FAIL_ON_IGNORED_PROPERTIES, false)
+)
+
+val gameLens = Json.autoBody<Game>().toLens()
 val xLens = Query.int().required("x")
 val yLens = Query.int().required("y")
 
