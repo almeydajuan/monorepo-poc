@@ -4,9 +4,11 @@ import com.juanalmeyda.infra.Proxy
 import com.juanalmeyda.tictactoe4k.FeatureFlagClient
 import com.juanalmeyda.tictactoe4k.Game
 import com.juanalmeyda.tictactoe4k.Json
+import com.juanalmeyda.tictactoe4k.Lookup
 import com.juanalmeyda.tictactoe4k.Move
 import com.juanalmeyda.tictactoe4k.Player.O
 import com.juanalmeyda.tictactoe4k.Player.X
+import com.juanalmeyda.tictactoe4k.WithKey
 import com.juanalmeyda.tictactoe4k.gameLens
 import com.juanalmeyda.tictactoe4k.newBackend
 import org.http4k.core.HttpHandler
@@ -18,6 +20,7 @@ import org.http4k.core.Response
 import org.http4k.core.Status
 import org.http4k.core.Status.Companion.ACCEPTED
 import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Status.Companion.UNAUTHORIZED
 import org.http4k.core.Uri
 import org.http4k.testing.ApprovalTest
 import org.http4k.testing.Approver
@@ -52,7 +55,7 @@ class BackendTest {
     @Test
     @ExtendWith(NewGameParameterResolver::class)
     fun `start new game`(backend: HttpHandler) {
-        val response = Request(GET, "http://localhost:8080/game").use(backend)
+        val response = Request(GET, "/game").use(backend)
 
         expectThat(response.status).isEqualTo(OK)
 
@@ -94,7 +97,7 @@ class BackendTest {
         val backend = newBackend(finishedGame)
         expectThat(backend(Request(DELETE, "/game")).status).isEqualTo(ACCEPTED)
 
-        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
+        val response: Response = backend(Request(GET, "/game"))
 
         expectThat(response.status).isEqualTo(OK)
 
@@ -109,11 +112,36 @@ class BackendTest {
         }
         val backend = newBackend(Game(), featureFlagClient)
 
-        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
+        val response: Response = backend(Request(GET, "/game"))
 
         expectThat(response.status).isEqualTo(Status.SERVICE_UNAVAILABLE)
     }
+
+    @Test
+    fun `check key security`() {
+        val backend = newBackend(
+            initialGame = Game(),
+            tokenSecurity = WithKey { "hello" }
+        )
+        expectThat(Request(GET, "/game").withAuth().use(backend).status).isEqualTo(OK)
+        expectThat(Request(GET, "/game").use(backend).status).isEqualTo(UNAUTHORIZED)
+    }
+
+
+    @Test
+    fun `check token security`() {
+        val backend = newBackend(
+            initialGame = Game(),
+            tokenSecurity = Lookup { "hello" }
+        )
+
+        expectThat(Request(GET, "/game").withAuth().use(backend).status).isEqualTo(OK)
+        expectThat(Request(GET, "/game").use(backend).status).isEqualTo(UNAUTHORIZED)
+    }
+
 }
+
+fun Request.withAuth() = this.header("Authorization", "Bearer 123")
 
 val finishedGame = Game()
     .makeMove(0, 0).makeMove(1, 0)

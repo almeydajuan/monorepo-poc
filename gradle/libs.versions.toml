@@ -75,6 +75,7 @@ http4k-client-okhttp = { module = "org.http4k:http4k-client-okhttp", version.ref
 http4k-template-handlebars = { module = "org.http4k:http4k-template-handlebars", version.ref = "http4k" }
 http4k-server-jetty = { module = "org.http4k:http4k-server-jetty", version.ref = "http4k" }
 http4k-openapi = { module = "org.http4k:http4k-api-openapi" , version.ref = "http4k" }
+http4k-security = { module = "org.http4k:http4k-security-oauth" , version.ref = "http4k" }
 
 kotlin-build-tools-impl = { module = "org.jetbrains.kotlin:kotlin-build-tools-impl" }
 

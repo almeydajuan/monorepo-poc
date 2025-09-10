@@ -9,6 +9,7 @@ dependencies {
     implementation(libs.http4k.format.jackson)
     implementation(libs.http4k.template.handlebars)
     implementation(libs.http4k.openapi)
+    implementation(libs.http4k.security)
 
     testApi(libs.strikt.core)
     testImplementation(libs.http4k.testing.approval)
