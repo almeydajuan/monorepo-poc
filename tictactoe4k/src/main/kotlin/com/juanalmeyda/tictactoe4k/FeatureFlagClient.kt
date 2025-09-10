@@ -16,10 +16,10 @@ class InMemoryFeatureFlagClient : FeatureFlagClient {
 
 val booleanLens = Body.auto<Boolean>().toLens()
 
-class FeatureFlagHttpClient(private val handler: HttpHandler) : FeatureFlagClient {
+class FeatureFlagHttpClient(private val http: HttpHandler) : FeatureFlagClient {
 
     override fun isAIOponentEnabled(): Boolean {
-        val result = handler(Request(Method.GET, "flag/aiOponent"))
+        val result = Request(Method.GET, "flag/aiOponent").use(http)
 
         return booleanLens(result)
     }

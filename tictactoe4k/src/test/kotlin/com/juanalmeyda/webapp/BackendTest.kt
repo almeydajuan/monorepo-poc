@@ -3,6 +3,7 @@ package com.juanalmeyda.webapp
 import com.juanalmeyda.infra.Proxy
 import com.juanalmeyda.tictactoe4k.FeatureFlagClient
 import com.juanalmeyda.tictactoe4k.Game
+import com.juanalmeyda.tictactoe4k.Json
 import com.juanalmeyda.tictactoe4k.Move
 import com.juanalmeyda.tictactoe4k.Player.O
 import com.juanalmeyda.tictactoe4k.Player.X
@@ -15,7 +16,12 @@ import org.http4k.core.Method.POST
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status
+import org.http4k.core.Status.Companion.ACCEPTED
 import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Uri
+import org.http4k.testing.ApprovalTest
+import org.http4k.testing.Approver
+import org.http4k.testing.assertApproved
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -24,14 +30,29 @@ import org.junit.jupiter.api.extension.ParameterContext
 import org.junit.jupiter.api.extension.ParameterResolver
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
+import java.io.File
 
 @DisplayName("Backend Tests using parameter resolvers")
+@ExtendWith(ApprovalTest::class)
 class BackendTest {
+
+    @Test
+    fun `generate open api definition`(approver: Approver) {
+        val request = Request(GET, Uri.of("/openapi.json"))
+
+        request
+            .use(newBackend(Game()))
+            .also { expectThat(it.status).isEqualTo(OK) }
+            .let { Json.prettify(it.bodyString()) }
+            .also { approver.assertApproved(it) }
+            .also { File("api-definition.json").writeText(it) }
+
+    }
 
     @Test
     @ExtendWith(NewGameParameterResolver::class)
     fun `start new game`(backend: HttpHandler) {
-        val response: Response = backend(Request(GET, "http://localhost:8080/game"))
+        val response = Request(GET, "http://localhost:8080/game").use(backend)
 
         expectThat(response.status).isEqualTo(OK)
 
@@ -71,7 +92,7 @@ class BackendTest {
     @ExtendWith(FinishedGameParameterResolver::class)
     fun `restart game`() {
         val backend = newBackend(finishedGame)
-        expectThat(backend(Request(DELETE, "/game")).status).isEqualTo(OK)
+        expectThat(backend(Request(DELETE, "/game")).status).isEqualTo(ACCEPTED)
 
         val response: Response = backend(Request(GET, "http://localhost:8080/game"))
 

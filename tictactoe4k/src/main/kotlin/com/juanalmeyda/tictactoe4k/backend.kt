@@ -5,11 +5,21 @@ import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_IGNORED_PRO
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import org.http4k.contract.contract
+import org.http4k.contract.meta
+import org.http4k.contract.openapi.ApiInfo
+import org.http4k.contract.openapi.ApiRenderer
+import org.http4k.contract.openapi.OpenApiVersion
+import org.http4k.contract.openapi.v3.AutoJsonToJsonSchema
+import org.http4k.contract.openapi.v3.OpenApi3
 import org.http4k.core.HttpHandler
-import org.http4k.core.Method
 import org.http4k.core.Method.DELETE
+import org.http4k.core.Method.GET
+import org.http4k.core.Method.POST
 import org.http4k.core.Response
-import org.http4k.core.Status
+import org.http4k.core.Status.Companion.ACCEPTED
+import org.http4k.core.Status.Companion.OK
+import org.http4k.core.Status.Companion.SERVICE_UNAVAILABLE
 import org.http4k.core.with
 import org.http4k.filter.ServerFilters
 import org.http4k.format.ConfigurableJackson
@@ -17,8 +27,6 @@ import org.http4k.format.asConfigurable
 import org.http4k.format.withStandardMappings
 import org.http4k.lens.Query
 import org.http4k.lens.int
-import org.http4k.routing.bind
-import org.http4k.routing.routes
 import java.util.concurrent.atomic.AtomicReference
 
 val Json = ConfigurableJackson(
@@ -41,25 +49,55 @@ val yLens = Query.int().required("y")
 fun newBackend(initialGame: Game, featureFlagClient: FeatureFlagClient = InMemoryFeatureFlagClient()): HttpHandler {
     val game = AtomicReference(initialGame)
 
-    return routes(
-        "/game" bind Method.GET to { _ ->
+    return contract {
+        renderer = OpenApi3(
+            apiInfo = ApiInfo("tictactoe4k", "v1.0"),
+            json = Json,
+            extensions = emptyList(),
+            apiRenderer = ApiRenderer.Auto(
+                json = Json,
+                schema = AutoJsonToJsonSchema(
+                    json = Json,
+                    typeToMetadata = emptyMap(),
+                )
+            ),
+            servers = emptyList(),
+            version = OpenApiVersion._3_0_0
+        )
+
+        descriptionPath = "/openapi.json"
+
+        routes += "/game" meta {
+            summary = "Retrieve the current game state"
+            returning(OK, gameLens to Game())
+        } bindContract GET to { _ ->
             if (featureFlagClient.isAIOponentEnabled()) {
-                Response(Status.SERVICE_UNAVAILABLE)
+                Response(SERVICE_UNAVAILABLE)
             } else {
-                Response(Status.OK).with(gameLens of game.get())
+                Response(OK).with(gameLens of game.get())
             }
-        },
-        "/game" bind Method.POST to { request ->
+        }
+
+        routes += "/game" meta {
+            summary = "Make a move"
+            queries += xLens
+            queries += yLens
+            returning(OK, gameLens to Game())
+        } bindContract POST to { request ->
             val x = xLens(request)
             val y = yLens(request)
 
             game.updateAndGet { it.makeMove(x, y) }
 
-            Response(Status.OK).with(gameLens of game.get())
-        },
-        "/game" bind DELETE to { _ ->
-            game.set(Game())
-            Response(Status.OK).with(gameLens of game.get())
+            Response(OK).with(gameLens of game.get())
         }
-    ).withFilter(ServerFilters.CatchAll())
+
+        routes += "/game" meta {
+            summary = "Reset the game"
+            returning(ACCEPTED, gameLens to Game())
+        } bindContract DELETE to { _ ->
+            game.set(Game())
+            Response(ACCEPTED).with(gameLens of game.get())
+        }
+    }.withFilter(ServerFilters.CatchAll())
 }

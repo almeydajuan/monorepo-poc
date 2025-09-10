@@ -1,0 +1,118 @@
+{
+  "info" : {
+    "title" : "tictactoe4k",
+    "version" : "v1.0"
+  },
+  "tags" : [ ],
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/game" : {
+      "delete" : {
+        "summary" : "Reset the game",
+        "tags" : [ "" ],
+        "parameters" : [ ],
+        "responses" : {
+          "202" : {
+            "description" : "Accepted",
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "moves" : [ ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/Game"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "operationId" : "deleteGame",
+        "deprecated" : false
+      },
+      "get" : {
+        "summary" : "Retrieve the current game state",
+        "tags" : [ "" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "moves" : [ ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/Game"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "operationId" : "getGame",
+        "deprecated" : false
+      },
+      "post" : {
+        "summary" : "Make a move",
+        "tags" : [ "" ],
+        "parameters" : [ {
+          "schema" : {
+            "type" : "integer"
+          },
+          "in" : "query",
+          "name" : "x",
+          "required" : true
+        }, {
+          "schema" : {
+            "type" : "integer"
+          },
+          "in" : "query",
+          "name" : "y",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "moves" : [ ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/Game"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "operationId" : "postGame",
+        "deprecated" : false
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Game" : {
+        "properties" : {
+          "moves" : {
+            "items" : { },
+            "example" : [ ],
+            "type" : "array",
+            "nullable" : false
+          }
+        },
+        "example" : {
+          "moves" : [ ]
+        },
+        "type" : "object",
+        "required" : [ "moves" ]
+      }
+    },
+    "securitySchemes" : { }
+  },
+  "openapi" : "3.0.0"
+}
