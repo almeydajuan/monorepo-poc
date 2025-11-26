@@ -29,5 +29,8 @@ tasks {
     dockerCompose {
         useComposeFiles = listOf("src/main/resources/docker-compose.yml")
         isRequiredBy(testsWithDatabase)
+
+        stopContainers = false
+        noRecreate = true
     }
 }
