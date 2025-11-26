@@ -2,7 +2,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin.VERIFICATION_GROUP
 
 plugins {
     id("kotlin")
-    id("com.avast.gradle.docker-compose")
+    alias(libs.plugins.docker.compose)
 }
 
 tasks {

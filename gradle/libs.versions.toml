@@ -11,15 +11,14 @@ exposed = "0.61.0"
 kotlin = "2.2.21"
 junit-jupiter = "6.0.1"
 http4k = "6.22.0.0"
-taskinfo = "2.2.1"
+docker-compose = "0.17.12"
 
 [plugins]
 
-org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version.ref = "taskinfo" }
-
+org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version = "2.2.1" }
 io-ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor" }
-
 org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "5.2.0" }
+docker-compose = { id = "com.avast.gradle.docker-compose", version.ref = "docker-compose" }
 
 [libraries]
 
@@ -36,7 +35,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
-gradle-docker-compose = { module = "com.avast.gradle:gradle-docker-compose-plugin", version = "0.17.20" }
+gradle-docker-compose = { module = "com.avast.gradle:gradle-docker-compose-plugin", version.ref = "docker-compose" }
 
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 
