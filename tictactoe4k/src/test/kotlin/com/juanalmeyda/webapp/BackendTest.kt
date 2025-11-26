@@ -149,19 +149,18 @@ val finishedGame = Game()
     .makeMove(0, 2)
 
 class NewGameParameterResolver : ParameterResolver {
+    override fun supportsParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext) =
+        parameterContext.parameter.type == HttpHandler::class.java
 
-    override fun supportsParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?) =
-        parameterContext?.parameter?.type == HttpHandler::class.java
-
-    override fun resolveParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?) =
+    override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext) =
         newBackend(Game())
 }
 
 class FinishedGameParameterResolver : ParameterResolver {
 
-    override fun supportsParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?) =
-        parameterContext?.parameter?.type == HttpHandler::class.java
+    override fun supportsParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext) =
+        parameterContext.parameter.type == HttpHandler::class.java
 
-    override fun resolveParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?) =
+    override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext) =
         newBackend(finishedGame)
 }
