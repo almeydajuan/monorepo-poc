@@ -11,5 +11,8 @@ dependencies {
     implementation(libs.guava)
 
     api(libs.gradle.docker.compose)
+    api(libs.flyway.core)
+    api(libs.flyway.database.postgresql)
+    api(libs.postgresql)
 }
 

@@ -12,6 +12,7 @@ kotlin = "2.2.21"
 junit-jupiter = "6.0.1"
 http4k = "6.22.0.0"
 docker-compose = "0.17.12"
+flyway = "11.8.2"
 
 [plugins]
 
@@ -36,6 +37,8 @@ ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", ve
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
 gradle-docker-compose = { module = "com.avast.gradle:gradle-docker-compose-plugin", version.ref = "docker-compose" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
 
 guava = { module = "com.google.guava:guava", version = "33.5.0-jre" }
 
