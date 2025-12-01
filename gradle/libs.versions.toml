@@ -4,22 +4,48 @@
 
 exposed = ["exposed-core", "exposed-jdbc"]
 
-[versions]
-
-ktor = "3.3.2"
-exposed = "0.61.0"
-kotlin = "2.2.21"
-junit-jupiter = "6.0.1"
-http4k = "6.22.0.0"
-docker-compose = "0.17.12"
-flyway = "11.8.2"
-
 [plugins]
 
 org-barfuin-gradle-taskinfo = { id = "org.barfuin.gradle.taskinfo", version = "2.2.1" }
 io-ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor" }
 org-gradle-kotlin-kotlin-dsl = { id = "org.gradle.kotlin.kotlin-dsl", version = "5.2.0" }
 docker-compose = { id = "com.avast.gradle.docker-compose", version.ref = "docker-compose" }
+
+[versions]
+
+ktor = "3.3.2"
+##⬆ = "3.3.3"
+exposed = "0.61.0"
+kotlin = "2.2.21"
+junit-jupiter = "6.0.1"
+http4k = "6.22.0.0"
+docker-compose = "0.17.20"
+flyway = "11.8.2"
+##  ⬆ = "11.9.0"
+##  ⬆ = "11.9.1"
+##  ⬆ = "11.9.2"
+##  ⬆ = "11.10.0"
+##  ⬆ = "11.10.1"
+##  ⬆ = "11.10.2"
+##  ⬆ = "11.10.3"
+##  ⬆ = "11.10.4"
+##  ⬆ = "11.10.5"
+##  ⬆ = "11.11.0"
+##  ⬆ = "11.11.1"
+##  ⬆ = "11.11.2"
+##  ⬆ = "11.12.0"
+##  ⬆ = "11.13.0"
+##  ⬆ = "11.13.1"
+##  ⬆ = "11.13.2"
+##  ⬆ = "11.13.3"
+##  ⬆ = "11.14.0"
+##  ⬆ = "11.14.1"
+##  ⬆ = "11.15.0"
+##  ⬆ = "11.16.0"
+##  ⬆ = "11.17.0"
+##  ⬆ = "11.17.1"
+##  ⬆ = "11.17.2"
+##  ⬆ = "11.18.0"
 
 [libraries]
 
