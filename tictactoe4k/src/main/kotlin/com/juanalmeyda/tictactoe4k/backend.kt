@@ -39,7 +39,7 @@ val Json = ConfigurableJackson(
         .withStandardMappings()
         .done()
         .deactivateDefaultTyping()
-        .setSerializationInclusion(NON_NULL)
+        .setDefaultPropertyInclusion(NON_NULL)
         .configure(FAIL_ON_NULL_FOR_PRIMITIVES, true)
         .configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
         .configure(FAIL_ON_IGNORED_PROPERTIES, false)
@@ -78,7 +78,7 @@ fun newBackend(
             summary = "Retrieve the current game state"
             security = tokenSecurity
             returning(OK, gameLens to Game())
-        } bindContract GET to { request ->
+        } bindContract GET to { _ ->
             if (featureFlagClient.isAIOponentEnabled()) {
                 Response(SERVICE_UNAVAILABLE)
             } else {
