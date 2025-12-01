@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("library")
     id("approve")
@@ -10,4 +12,9 @@ dependencies {
 
     testImplementation(libs.http4k.format.jackson.yaml)
     testImplementation(libs.http4k.testing.approval)
+}
+val compileKotlin: KotlinCompile by tasks
+
+compileKotlin.compilerOptions {
+    freeCompilerArgs.set(listOf("-Xannotation-default-target=param-property"))
 }
